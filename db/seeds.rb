@@ -5,3 +5,10 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+Sensor.create(string: "Like" , name:"Sensor de sentimento")
+Sensor.create(string: "Note" , name:"Sensor de sensação")
+Sensor.create(string: "Jesty" , name:"Sensor de drenagem")
+Sensor.create(string: "Lex" , name:"Sensor de pressão")
+Sensor.create(string: "Jem" , name:"Sensor de volume")
+

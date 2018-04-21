@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ChartKickExample</title>
+
+  <%= javascript_include_tag "googleapi.js", "chartkick" %>
+
+</head>
+<body>
+  <p>
+  	Estou na dashboard 
+  </p>
+  <%= pie_chart @sensors.group(:name).count %>
+</body>
+</html>
