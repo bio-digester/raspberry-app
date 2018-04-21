@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Data measure:</strong>
+  <%= @data_collect.data_measure %>
+</p>
+
+<p>
+  <strong>Value:</strong>
+  <%= @data_collect.value %>
+</p>
+
+<p>
+  <strong>Sensor:</strong>
+  <%= @data_collect.sensor %>
+</p>
+
+<%= link_to 'Edit', edit_sensor_data_collect_path(@data_collect) %> |
+<%= link_to 'Back', sensors_data_collects_path %>

@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Data Collects</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Data measure</th>
+      <th>Value</th>
+      <th>Sensor</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @data_collects.each do |data_collect| %>
+      <tr>
+        <td><%= data_collect.data_measure %></td>
+        <td><%= data_collect.value %></td>
+        <td><%= data_collect.sensor %></td>
+        <td><%= link_to 'Show', sensor_data_collect_path, method: :show, :id => data_collect.id %></td>
+
+        <td><%= link_to 'Edit', edit_sensor_data_collect_path(data_collect) %></td>
+        <td><%= link_to 'Destroy', sensors_data_collect, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Data Collect', new_sensor_data_collect_path %>

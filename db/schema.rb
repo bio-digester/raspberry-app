@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180420203636) do
+ActiveRecord::Schema.define(version: 20180420220326) do
+
+  create_table "data_collects", force: :cascade do |t|
+    t.string "data_measure"
+    t.string "value"
+    t.integer "sensor_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["sensor_id"], name: "index_data_collects_on_sensor_id"
+  end
 
   create_table "sensors", force: :cascade do |t|
-    t.string "string"
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
