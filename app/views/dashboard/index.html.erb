@@ -7,24 +7,30 @@
 <body>
   
     <canvas id="myCanvas" style="border: 1px solid black"></canvas>
+    <canvas id="myCanvas1" style="border: 1px solid black"></canvas>
 
 
 
     <%= javascript_tag do %>
         var myCanvas = document.getElementById("myCanvas");
+        var myCanvas1 = document.getElementById("myCanvas1");
+
         myCanvas.width = 300;
         myCanvas.height = 300;
+        myCanvas1.width = 300;
+        myCanvas1.height = 300;
 
         var descontoHorizontal = 60;
         var descontroVertical = 60;
 
-        var widthGrafico = myCanvas.width - descontoHorizontal; // tirando 30 pixels para cada lado
-        var heightGrafico = myCanvas.height - descontroVertical // tirando 30 pixel para cada lado
+        var widthGrafico = myCanvas.width - descontoHorizontal; // metade desconto horizontal pra esquerda
+        var heightGrafico = myCanvas.height - descontroVertical // metade desconto vertical pra cima
 
         var inicioGraficoX = descontoHorizontal / 2;
         var inicioGraficoY = descontroVertical / 2;
          
-        var ctx = myCanvas.getContext("2d");
+        var context1 = myCanvas.getContext("2d");
+        var context2 = myCanvas1.getContext("2d");
 
         var valoresColunaDesformatado = "<%= @valoresColuna.join ',' %>";
         var arrayCoresDesformatado = "<%= @arrayCores.join ',' %>";
@@ -32,16 +38,14 @@
         var valoresColunas = formata(valoresColunaDesformatado);
         var arrayCores = formata(arrayCoresDesformatado);
 
-        console.log(valoresColunas);
-        console.log(arrayCores);
+        var espacado1 = true;
 
-        desenhaGraficoBarras(valoresColunas, arrayCores);
+        desenhaGraficoBarras(context1, valoresColunas, arrayCores, espacado1);
 
+        var espacado2 = false;
 
-        function formata(arrayCoresDesformatado){
-            var arrayCores = arrayCoresDesformatado.split(",");
-            return arrayCores;
-        }
+        desenhaGraficoBarras(context2, valoresColunas, arrayCores, espacado2);
+        
     <% end %>
 
 

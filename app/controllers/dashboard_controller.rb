@@ -3,12 +3,22 @@ class DashboardController < ApplicationController
 
 		@arrayCores = [
             "#abc123",
-            "#fff234"
+            "#112242",
+            "#6571ba",
+            "#abc123",
+            "#fd2242",
+            "#abc123",
+            "#f12242"
         ];
 
         @valoresColuna = [
             70,
-            130
+            44,
+            56,
+            70,
+            44,
+            70,
+          	34
         ];
 
 
