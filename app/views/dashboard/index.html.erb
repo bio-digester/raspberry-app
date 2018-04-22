@@ -1,15 +1,46 @@
 <!DOCTYPE html>
 <html>
+<meta charset='utf-8'>
 <head>
-  <title>ChartKickExample</title>
-
-  <%= javascript_include_tag "googleapi.js", "chartkick" %>
-
+   
 </head>
 <body>
-  <p>
-  	Estou na dashboard 
-  </p>
-  <%= pie_chart @sensors.group(:name).count %>
+
+    <h1>OI </h1>
+    <canvas id="myCanvas" style="border: 1px solid yellow"></canvas>
+    
+    <script>
+
+        var myCanvas = document.getElementById("myCanvas");
+        myCanvas.width = 300;
+        myCanvas.height = 300;
+
+        var descontoHorizontal = 60;
+        var descontroVertical = 60;
+
+        var widthGrafico = myCanvas.width - descontoHorizontal; // tirando 30 pixels para cada lado
+        var heightGrafico = myCanvas.height - descontroVertical // tirando 30 pixel para cada lado
+
+        var inicioGraficoX = descontoHorizontal / 2;
+        var inicioGraficoY = descontroVertical / 2;
+         
+        var ctx = myCanvas.getContext("2d");
+
+        var arrayCores = [
+            "#440000",
+            "#CCCCCC"
+        ];
+
+        var valoresColuna = [
+            30,
+            50
+        ];
+
+
+        desenhaGraficoBarras(valoresColuna, arrayCores);
+
+    </script>
+    
 </body>
 </html>
+
