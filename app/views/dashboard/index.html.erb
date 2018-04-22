@@ -5,12 +5,12 @@
    
 </head>
 <body>
+  
+    <canvas id="myCanvas" style="border: 1px solid black"></canvas>
 
-    <h1>OI </h1>
-    <canvas id="myCanvas" style="border: 1px solid yellow"></canvas>
-    
-    <script>
 
+
+    <%= javascript_tag do %>
         var myCanvas = document.getElementById("myCanvas");
         myCanvas.width = 300;
         myCanvas.height = 300;
@@ -26,18 +26,28 @@
          
         var ctx = myCanvas.getContext("2d");
 
-        var arrayCores = [
-            "#440000",
-            "#CCCCCC"
-        ];
+        var valoresColunaDesformatado = "<%= @valoresColuna.join ',' %>";
+        var arrayCoresDesformatado = "<%= @arrayCores.join ',' %>";
 
-        var valoresColuna = [
-            30,
-            50
-        ];
+        var valoresColunas = formata(valoresColunaDesformatado);
+        var arrayCores = formata(arrayCoresDesformatado);
+
+        console.log(valoresColunas);
+        console.log(arrayCores);
+
+        desenhaGraficoBarras(valoresColunas, arrayCores);
 
 
-        desenhaGraficoBarras(valoresColuna, arrayCores);
+        function formata(arrayCoresDesformatado){
+            var arrayCores = arrayCoresDesformatado.split(",");
+            return arrayCores;
+        }
+    <% end %>
+
+
+    
+    <script>
+
 
     </script>
     
