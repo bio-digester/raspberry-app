@@ -44,8 +44,16 @@ function desenhaGraficoBarras(context,valoresColuna, arrayCores, espacado=false)
     }
 
     var x = inicioGraficoX + valorEspacamento / 2 ;
-    var y = inicioGraficoY + heightGrafico - valoresColuna[0];
 
+    var maiorValorColuna = Math.max.apply(null, valoresColuna);
+
+    var distanciaMaiorValorParaTopoEixoY = 10;
+    var meu_cem_porcento = heightGrafico - distanciaMaiorValorParaTopoEixoY;
+
+    var tamanhoRelativoColuna = meu_cem_porcento * (valoresColuna[0] / maiorValorColuna); 
+
+    var y = inicioGraficoY + heightGrafico - tamanhoRelativoColuna ;
+  
     for(i = 0 ; i < quantidadeBarras ; i++){
 
         drawLine(ctx, x + widthColuna/2, inicioGraficoY + heightGrafico, x + widthColuna / 2 , inicioGraficoY +heightGrafico - 2); // desenha tracos no eixo x
@@ -53,11 +61,12 @@ function desenhaGraficoBarras(context,valoresColuna, arrayCores, espacado=false)
         heightColuna = valoresColuna[i];
      
         color = arrayCores[i];
-        desenhaBarras(x, y, widthColuna, heightColuna, color);
+        desenhaBarras(x, y, widthColuna, tamanhoRelativoColuna, color);
         
 
         x = x + widthColuna + valorEspacamento;
-        y = inicioGraficoY + heightGrafico - valoresColuna[i + 1];
+        tamanhoRelativoColuna = meu_cem_porcento * (valoresColuna[i+1] / maiorValorColuna); 
+        y = inicioGraficoY  + heightGrafico - tamanhoRelativoColuna;
     }   
 }
 

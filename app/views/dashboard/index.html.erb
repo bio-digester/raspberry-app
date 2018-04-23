@@ -7,6 +7,7 @@
 <body>
   
     <canvas id="myCanvas" style="border: 1px solid black"></canvas>
+    <br>
     <canvas id="myCanvas1" style="border: 1px solid black"></canvas>
 
 
@@ -15,19 +16,19 @@
         var myCanvas = document.getElementById("myCanvas");
         var myCanvas1 = document.getElementById("myCanvas1");
 
-        myCanvas.width = 300;
+        myCanvas.width = 900;
         myCanvas.height = 300;
-        myCanvas1.width = 300;
+        myCanvas1.width = 900;
         myCanvas1.height = 300;
 
-        var descontoHorizontal = 60;
-        var descontroVertical = 60;
+        var descontoHorizontal = 140;
+        var descontroVertical = 120;
 
         var widthGrafico = myCanvas.width - descontoHorizontal; // metade desconto horizontal pra esquerda
         var heightGrafico = myCanvas.height - descontroVertical // metade desconto vertical pra cima
 
-        var inicioGraficoX = descontoHorizontal / 2;
-        var inicioGraficoY = descontroVertical / 2;
+        var inicioGraficoX = descontoHorizontal / 2 ;
+        var inicioGraficoY = descontroVertical / 2 ;
          
         var context1 = myCanvas.getContext("2d");
         var context2 = myCanvas1.getContext("2d");

@@ -12,13 +12,13 @@ class DashboardController < ApplicationController
         ];
 
         @valoresColuna = [
-            70,
+            90,
             44,
             56,
             70,
-            44,
+            90,
             70,
-          	34
+          	180
         ];
 
 
