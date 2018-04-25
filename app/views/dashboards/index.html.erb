@@ -1,0 +1,30 @@
+<h1>Dashboard</h1>
+<p>Dados Coletados X Sensor</p>
+<%= pie_chart DataCollect.group(:sensor_id).count %>
+
+<p>Temperatura X Tempo</p>
+
+  <%= line_chart @temperature.pluck(:value, :sensor_id)%>
+
+<p>Produção de Gás X Tempo</p>
+
+
+<p>Pressão X Tempo</p>
+
+<%= line_chart @pressure.group_by_day(:data_measure).count %>
+
+<p>Nível X Tempo</p>
+
+<%= line_chart @level.group_by_day(:data_measure).count %>
+
+<p>Fluxo de Água X Tempo</p>
+
+<%= line_chart @water_flux.group_by_day(:data_measure).count %>
+
+
+<p>Temperatura + Produção de Gás + Pressão + Nível + Fluxo de Água X Tempo</p>
+<%= line_chart @sensors.map { |s|
+    {sensor: s.name, data: s.data_collect.group_by_day(:data_measure).count}
+} %>
+
+<%= line_chart({20.day.ago => 5, 1368174456 => 4, "2013-05-07 00:00:00 UTC" => 7}) %>
