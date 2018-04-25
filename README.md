@@ -1,24 +1,55 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Instruções
 
-Things you may want to cover:
+## Dependencias do Projeto
 
-* Ruby version
+* Ruby 2.5.0
 
-* System dependencies
+* Rails 5.2.0
 
-* Configuration
+* Postgre 9.6
 
-* Database creation
+## Passo a Passo:
 
-* Database initialization
+Siga as instruções https://rvm.io/ para instalar o rvm
 
-* How to run the test suite
+Instalando o ruby usando rvm
 
-* Services (job queues, cache servers, search engines, etc.)
+```$ rvm install 2.5.0```
 
-* Deployment instructions
+Instalando o rails
 
-* ...
+```$ gem install rails ```
+
+Instalando dependencias do projeto (execute dentro da pasta do projeto !)
+
+```bundle install```
+
+Configurando o banco:
+
+Acesse o banco postgres com o usuário padrão postgres:
+
+```sudo -u postgres psql```
+
+Crie um usuario para manipular o banco:
+
+```create role raspberry_user with createdb password 'raspberry' login;```
+
+Crie o banco, setando como owner o usuário criado anteriormente:
+
+```create database raspberry_db with owner raspberry_user encoding "unicode";```
+
+Saia do postgre e faça a migração das tabelas:
+
+```rake db:migrate```
+
+Populando o banco com dados Fake
+
+```rake db:seed```
+
+Executando o projeto
+
+```rails s```
+
+Acesse a aplicação em localhost:3000
