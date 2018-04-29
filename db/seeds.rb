@@ -4,7 +4,7 @@ puts "Criando Sensores e DataCollects"
 
 Sensor.create!([{ name: "temperature" },
   { name: "methane_gas" }, { name: "pressure" },
-  { name: "level" }, { name: "water_flux" }])
+  { name: "level" }, { name: "water_flux" }, {name: "ph"}])
 
 Sensor.all.each do |f|
   50.times do
