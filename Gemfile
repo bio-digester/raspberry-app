@@ -33,6 +33,10 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 # Use Postgresql as the database for Active Record
 gem 'pg'
+gem 'jquery-rails'
+gem 'font-awesome-rails'
+gem 'bootstrap_sb_admin_base_v2'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
