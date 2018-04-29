@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 20180420220326) do
   enable_extension "plpgsql"
 
   create_table "data_collects", force: :cascade do |t|
-    t.string "data_measure"
+    t.datetime "data_measure"
     t.string "value"
     t.bigint "sensor_id"
     t.datetime "created_at", null: false
