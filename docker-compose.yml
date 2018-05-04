@@ -1,0 +1,16 @@
+version: '3'
+services:
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: raspberry
+      POSTGRES_USER: raspberry_user
+  raspberry_app:
+    build: .
+    command: bash -c "rm -rf tmp/pids/server.pid && bundle exec rake db:create db:migrate db:seed && rails s -p 3000 -b '0.0.0.0'"
+    volumes:
+      - .:/raspberry_app
+    ports:
+      - "80:3000"
+    depends_on:
+      - postgres
