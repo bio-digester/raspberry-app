@@ -139,7 +139,7 @@
         </div>
         <!-- /.panel-heading -->
         <div class="panel-body">
-          <div id="morris-area-chart"><%= line_chart @temperature.pluck(:data_measure, :value), adapter: "highcharts"%></div>
+          <div id="morris-area-chart"><%= line_chart get_temperature_path, adapter: "highcharts", refresh: 1%></div>
         </div>
         <!-- /.panel-body -->
       </div>
@@ -390,7 +390,7 @@
           <i class="fa fa-bar-chart-o fa-fw"></i> Volume de Dados VS Sensor
         </div>
         <div class="panel-body">
-          <div id="morris-donut-chart"><%= pie_chart DataCollect.group(:sensor_id).count, donut: true %></div>
+          <div id="morris-donut-chart"><%= pie_chart @dataCollectedFromSensorsWithName, donut: true %></div>
           <a href="#" class="btn btn-default btn-block">View Details</a>
         </div>
         <!-- /.panel-body -->
