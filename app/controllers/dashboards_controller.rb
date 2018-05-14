@@ -16,7 +16,7 @@ class DashboardsController < ApplicationController
     dataCollectedFromSensors = DataCollect.group(:sensor_id).count
     dataCollectedFromSensorsWithName = Array.new
     for sensor in dataCollectedFromSensors do
-      dataCollectedFromSensorsWithName.push([Sensor.find(sensor[0]).name, sensor[1]])
+      dataCollectedFromSensorsWithName.push([Sensor.find(sensor[0]).codenome, sensor[1]])
     end
     return dataCollectedFromSensorsWithName
   end
