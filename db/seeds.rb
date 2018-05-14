@@ -2,9 +2,10 @@ DataCollect.destroy_all
 Sensor.destroy_all
 puts "Criando Sensores e DataCollects"
 
-Sensor.create!([{ name: "temperature" },
-  { name: "methane_gas" }, { name: "pressure" },
-  { name: "level" }, { name: "water_flux" }, {name: "ph"}])
+Sensor.create!([{ name: "temperature", codenome: "Temperatura" },
+  { name: "methane_gas", codenome: "Gás Metano" }, { name: "pressure" , codenome: "Pressão" },
+  { name: "level" , codenome: "Nível" }, { name: "water_flux", codenome: "Fluxo de Água" },
+  {name: "ph" , codenome: "pH"}])
 
 Sensor.all.each do |f|
   50.times do
