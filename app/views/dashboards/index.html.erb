@@ -17,7 +17,7 @@
               <i class="fa fa-thermometer fa-2x"></i>
             </div>
             <div class="col-xs-9 text-right">
-              <div class="huge"><%= '%.5f' % @temperature.last.value%></div>
+              <div class="huge"><%= '%.2f' % @temperature.last.value%></div>
               <%=@temperature.last.data_measure.strftime("%d/%m/%Y - %I:%M %p")%>
               <div>Temperatura</div>
             </div>
@@ -40,7 +40,7 @@
               <i class="fa fa-level-up fa-2x"></i>
             </div>
             <div class="col-xs-9 text-right">
-              <div class="huge"><%= '%.5f' % @level.last.value %></div>
+              <div class="huge"><%= '%.2f' % @level.last.value %></div>
               <%=@level.last.data_measure.strftime("%d/%m/%Y - %I:%M %p")%>
               <div>Nível</div>
             </div>
@@ -63,7 +63,7 @@
               <i class="fa fa-tachometer	 fa-2x"></i>
             </div>
             <div class="col-xs-9 text-right">
-              <div class="huge"><%='%.5f' %  @pressure.last.value %></div>
+              <div class="huge"><%='%.2f' %  @pressure.last.value %></div>
               <%=@pressure.last.data_measure.strftime("%d/%m/%Y - %I:%M %p")%>
               <div>Pressão</div>
             </div>
@@ -86,7 +86,7 @@
               <i class="fa fa-2x"></i>
             </div>
             <div class="col-xs-9 text-right">
-              <div class="huge"><%= '%.5f' % @water_flux.last.value%></div>
+              <div class="huge"><%= '%.2f' % @water_flux.last.value%></div>
               <%=@water_flux.last.data_measure.strftime("%d/%m/%Y - %I:%M %p")%>
               <div>Fluxo de Água</div>
             </div>
@@ -155,7 +155,7 @@
         </div>
         <!-- /.panel-heading -->
         <div class="panel-body">
-          <div id="morris-area-chart"><%= line_chart @temperature.pluck(:data_measure, :value), adapter: "highcharts"%></div>
+          <div id="morris-area-chart"><%= line_chart get_temperature_path, adapter: "highcharts", refresh: 1%></div>
         </div>
         <!-- /.panel-body -->
       </div>
@@ -406,7 +406,7 @@
           <i class="fa fa-bar-chart-o fa-fw"></i> Volume de Dados VS Sensor
         </div>
         <div class="panel-body">
-          <div id="morris-donut-chart"><%= pie_chart DataCollect.group(:sensor_id).count, donut: true %></div>
+          <div id="morris-donut-chart"><%= pie_chart @dataCollectedFromSensorsWithName, donut: true %></div>
           <a href="#" class="btn btn-default btn-block">View Details</a>
         </div>
         <!-- /.panel-body -->
