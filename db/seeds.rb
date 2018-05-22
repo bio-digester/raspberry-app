@@ -7,6 +7,7 @@ Sensor.create!([{ name: "TEMPDS", codename: "Temperatura" },
   { name: "LEVEL" , codename: "Nível" }, { name: "water_flux", codename: "Fluxo de Água" },
   {name: "PH" , codename: "pH"}])
 
+
 Sensor.all.each do |f|
   50.times do
     begin
