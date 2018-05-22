@@ -4,12 +4,12 @@ puts "Criando Sensores e DataCollects"
 
 Sensor.create!([{ name: "TEMPDS", codename: "Temperatura" },
   { name: "CONCENTRATION", codename: "Gás Metano" }, { name: "PRESSURE" , codename: "Pressão" },
-  { name: "LEVEL" , codename: "Nível" }, { name: "water_flux", codename: "Fluxo de Água" },
+  { name: "LEVEL" , codename: "Nível" }, { name: "ENTRY", codename: "Alimentação" },
   {name: "PH" , codename: "pH"}])
 
 
 Sensor.all.each do |f|
-  50.times do
+  1000.times do
     begin
       DataCollect.create!({
         value: Faker::Number.between(0.01, 1.5),

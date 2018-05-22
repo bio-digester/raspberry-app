@@ -77,7 +77,7 @@
       </div>
     </div>
 
-    <!-- Fluxo -->
+    <!-- Alimentação -->
     <div class="col-lg-3 col-md-6">
       <div class="panel panel-primary">
         <div class="panel-heading">
@@ -86,9 +86,9 @@
               <i class="fa fa-2x"></i>
             </div>
             <div class="col-xs-9 text-right">
-              <div class="huge"><%= '%.2f' % @water_flux.last.value%></div>
-              <%=@water_flux.last.data_measure.strftime("%d/%m/%Y - %I:%M %p")%>
-              <div>Fluxo de Água</div>
+              <div class="huge"><%= '%.2f' % @input.last.value%></div>
+              <%=@input.last.data_measure.strftime("%d/%m/%Y - %I:%M %p")%>
+              <div>Alimentação</div>
             </div>
           </div>
         </div>
@@ -155,7 +155,7 @@
         </div>
         <!-- /.panel-heading -->
         <div class="panel-body">
-          <div id="morris-area-chart"><%= line_chart get_temperature_path, adapter: "highcharts", refresh: 1%></div>
+          <div id="morris-area-chart"><%= line_chart get_temperature_path, adapter: "highcharts", refresh: 10%></div>
         </div>
         <!-- /.panel-body -->
       </div>
@@ -186,7 +186,7 @@
         </div>
         <!-- /.panel-heading -->
         <div class="panel-body">
-          <div id="morris-area-chart"><%= line_chart @level.pluck(:data_measure, :value)%></div>
+          <div id="morris-area-chart"><%= line_chart @level.pluck(:data_measure, :value), adapter: "highcharts"%></div>
         </div>
         <!-- /.panel-body -->
       </div>
@@ -217,16 +217,16 @@
         </div>
         <!-- /.panel-heading -->
         <div class="panel-body">
-          <div id="morris-area-chart"><%= line_chart @pressure.pluck(:data_measure, :value)%></div>
+          <div id="morris-area-chart"><%= line_chart @pressure.pluck(:data_measure, :value), adapter: "highcharts"%></div>
         </div>
         <!-- /.panel-body -->
       </div>
 
 
-      <!-- Gráfico de Fluxo de Água -->
+      <!-- Gráfico de Alimentação -->
       <div class="panel panel-default">
         <div class="panel-heading">
-          <i class="fa fa-bar-chart-o fa-fw"></i> Fluxo Vs Tempo
+          <i class="fa fa-bar-chart-o fa-fw"></i> Alimentação Vs Tempo
           <div class="pull-right">
             <div class="btn-group">
               <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
@@ -249,7 +249,7 @@
         </div>
         <!-- /.panel-heading -->
         <div class="panel-body">
-          <div id="morris-area-chart"><%= line_chart @water_flux.pluck(:data_measure, :value)%></div>
+          <div id="morris-area-chart"><%= line_chart @input.pluck(:data_measure, :value), adapter: "highcharts"%></div>
         </div>
         <!-- /.panel-body -->
       </div>
