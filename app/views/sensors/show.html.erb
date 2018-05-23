@@ -45,24 +45,8 @@
           Panel Footer
         </div>
       </div>
-      <% elsif @sensor.name == "ENTRY" %>
-      <div class="panel panel-primary">
-        <div class="panel-heading">
-          Monitoramento de Alimentação
-        </div>
-        <div class="panel-body">
-          <p>A pressão do gás no interior da câmara de biodigestão é um parâmetro importante
-            para manter a operação segura do equipamento. Neste projeto a pressão será medida pelo
-            sensor de pressão MPX10DP que possui uma faixa de medição de pressão de 0 a 10 kpa
-            e uma faixa de operação de temperatura de 0 a 85 ºC, com erro de 2,5%.
-          </p>
-        </div>
-        <div class="panel-footer">
-          Panel Footer
-        </div>
-      </div>
       <% elsif @sensor.name == "PH" %>
-      <div class="panel panel-default">
+      <div class="panel panel-primary">
         <div class="panel-heading">
           Monitoramento de PH
         </div>
@@ -71,6 +55,19 @@
             pH em uma faixa adequada, uma vez que são encontrados distintos grupos de bactérias
             atuando na degradação dos compostos orgânicos. De acordo com (CAMPOS et al., 2006),
             a faixa fica entre 6,5 e 7,5, para o melhor desempenho dos microrganismos.
+          </p>
+        </div>
+        <div class="panel-footer">
+          Panel Footer
+        </div>
+      </div>
+      <% elsif @sensor.name == "CONCENTRATION" %>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          Monitoramento da Concentração
+        </div>
+        <div class="panel-body">
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
           </p>
         </div>
         <div class="panel-footer">

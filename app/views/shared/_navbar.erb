@@ -319,10 +319,13 @@
                                     <%= link_to "Nível", sensor_path(@sensors.find_by(name: "LEVEL")) %>
                                 </li>
                                 <li>
-                                  <%= link_to "Alimentação", sensor_path(@sensors.find_by(name: "ENTRY")) %>
+                                  <%= link_to "Pressão", sensor_path(@sensors.find_by(name: "PRESSURE")) %>
                                 </li>
                                 <li>
                                   <%= link_to "PH", sensor_path(@sensors.find_by(name: "PH")) %>
+                                </li>
+                                <li>
+                                  <%= link_to "Concentração", sensor_path(@sensors.find_by(name: "CONCENTRATION")) %>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->

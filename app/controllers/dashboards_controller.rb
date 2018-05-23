@@ -7,7 +7,6 @@ class DashboardsController < ApplicationController
     @pressure = DataCollect.where(sensor_id: Sensor.find_by(name: "PRESSURE").id)
     @methane_gas = DataCollect.where(sensor_id: Sensor.find_by(name: "CONCENTRATION").id)
     @level = DataCollect.where(sensor_id: Sensor.find_by(name: "LEVEL").id)
-    @input = DataCollect.where(sensor_id: Sensor.find_by(name: "ENTRY").id)
     @ph = DataCollect.where(sensor_id: Sensor.find_by(name: "PH").id)
     @dataCollectedFromSensorsWithName = getDataCollectedFromSensorsWithName
   end
