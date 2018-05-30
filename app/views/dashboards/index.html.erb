@@ -17,7 +17,7 @@
               <i class="fa fa-thermometer fa-2x"></i>
             </div>
             <div class="col-xs-9 text-right">
-              <div class="huge"><%= '%.2f' % @temperature.last.value%></div>
+              <div class="huge"><%= '%.2f' % @temperature.last.value%> ºC</div>
               <%=@temperature.last.data_measure.strftime("%d/%m/%Y - %I:%M %p")%>
               <div>Temperatura</div>
             </div>
@@ -42,7 +42,7 @@
               <i class="fa fa-level-up fa-2x"></i>
             </div>
             <div class="col-xs-9 text-right">
-              <div class="huge"><%= '%.2f' % @level.last.value %></div>
+              <div class="huge"><%= '%.2f' % @level.last.value %> cm³</div>
               <%=@level.last.data_measure.strftime("%d/%m/%Y - %I:%M %p")%>
               <div>Nível</div>
             </div>
@@ -67,7 +67,7 @@
               <i class="fa fa-tachometer	 fa-2x"></i>
             </div>
             <div class="col-xs-9 text-right">
-              <div class="huge"><%='%.2f' %  @pressure.last.value %></div>
+              <div class="huge"><%='%.2f' %  @pressure.last.value %> kPa</div>
               <%=@pressure.last.data_measure.strftime("%d/%m/%Y - %I:%M %p")%>
               <div>Pressão</div>
             </div>
