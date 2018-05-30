@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 20180504184417) do
 
   create_table "sensors", force: :cascade do |t|
     t.string "name"
-    t.string "codenome"
+    t.string "codename"
   end
 
   add_foreign_key "data_collects", "sensors"

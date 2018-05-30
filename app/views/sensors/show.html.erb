@@ -1,0 +1,122 @@
+<div id="page-wrapper">
+  <h1 class="page-header"><%= @sensor.name %></h1>
+  <div class="row">
+
+    <div class="col-lg-4">
+      <% if @sensor.name == "TEMPDS"%>
+      <div class="panel panel-red">
+        <div class="panel-heading">
+          Monitoramento de temperatura
+        </div>
+        <div class="panel-body">
+          <p>A temperatura influencia no metabolismo bacteriano, por isso ela precisa ser monitorada,
+            uma vez que a faixa de temperatura ideal é entre 30∘𝐶 a 45∘𝐶, abaixo ou acima
+            dessa faixa diminui o rendimento da produção e as bactérias podem morrer.</p>
+          </div>
+          <div class="panel-footer">
+            Panel Footer
+          </div>
+        </div>
+
+        <% elsif @sensor.name == "LEVEL" %>
+        <div class="panel panel-green">
+          <div class="panel-heading">
+            Monitoramento de nível
+          </div>
+          <div class="panel-body">
+            <p>É necessário saber a todo momento qual o nível do líquido biofertilizante no interior
+              do biodigestor, pois é a partir deste parâmetro que o servidor sabe quanto de volume
+              útil existe para produção de gás metano, sabe quando o nível está se aproximando do
+              mínimo e no sentido oposto sabe quando o biodigestor atingiu o nível máximo.</p>
+            </div>
+            <div class="panel-footer">
+              Panel Footer
+            </div>
+          </div>
+
+          <% elsif @sensor.name == "PRESSURE" %>
+          <div class="panel panel-yellow">
+            <div class="panel-heading">
+              Monitoramento de Pressão
+            </div>
+            <div class="panel-body">
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
+            </div>
+            <div class="panel-footer">
+              Panel Footer
+            </div>
+          </div>
+
+
+          <% elsif @sensor.name == "ENTRY" %>
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              Monitoramento de Fluxo de Água
+            </div>
+            <div class="panel-body">
+              <p>A pressão do gás no interior da câmara de biodigestão é um parâmetro importante
+para manter a operação segura do equipamento. Neste projeto a pressão será medida pelo
+sensor de pressão MPX10DP que possui uma faixa de medição de pressão de 0 a 10 kpa
+e uma faixa de operação de temperatura de 0 a 85 ºC, com erro de 2,5%.</p>
+              </div>
+              <div class="panel-footer">
+                Panel Footer
+              </div>
+            </div>
+
+            <% elsif @sensor.name == "PH" %>
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                Monitoramento de PH
+              </div>
+              <div class="panel-body">
+                <p>Durante a digestão anaeróbica, é de fundamental importância buscar manter o
+                  pH em uma faixa adequada, uma vez que são encontrados distintos grupos de bactérias
+                  atuando na degradação dos compostos orgânicos. De acordo com (CAMPOS et al., 2006),
+                  a faixa fica entre 6,5 e 7,5, para o melhor desempenho dos microrganismos.</p>
+                </div>
+                <div class="panel-footer">
+                  Panel Footer
+                </div>
+              </div>
+              <%end%>
+              <!-- /.col-lg-4 -->
+            </div>
+
+            <div class="col-lg-8">
+              <!-- Grafico Temperatura -->
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <i class="fa fa-bar-chart-o fa-fw"></i> <%= @sensor.name %> Vs Tempo
+                  <div class="pull-right">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                        Actions
+                        <span class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu pull-right" role="menu">
+                        <li><a href="#">Action</a>
+                        </li>
+                        <li><a href="#">Another action</a>
+                        </li>
+                        <li><a href="#">Something else here</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="#">Separated link</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- /.panel-heading -->
+              <div class="panel-body">
+                <div id="morris-area-chart"><%= line_chart @data_collects.pluck(:data_measure, :value), adapter: "highcharts"%></div>
+              </div>
+              <!-- /.panel-body -->
+            </div>
+
+          </div>
+          <!-- /.row -->
