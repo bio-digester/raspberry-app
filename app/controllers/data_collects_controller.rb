@@ -4,7 +4,11 @@ class DataCollectsController < ApplicationController
 
  # GET /sensor/:sensor_id/data_collects
  def index
-   json_response(@sensor.data_collect)
+    list = []
+     @sensor.data_collect.all.each do |d|
+       list.push([d.data_measure.to_i * 1000, d.value.to_f])
+     end
+   json_response(list)
  end
 
  # GET /sensor/:sensor_id/data_collects/:id

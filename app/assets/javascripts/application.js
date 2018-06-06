@@ -17,6 +17,8 @@
 //= require highcharts
 //= require chartkick
 //= require jquery
+//= require jquery3
 //= require jquery_ujs
 //= require bootstrap_sb_admin_base_v2
+//= require jquery.canvasjs.min
 //= require canvasjs.min

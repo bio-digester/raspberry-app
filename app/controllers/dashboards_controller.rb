@@ -3,11 +3,11 @@ class DashboardsController < ApplicationController
   def index
     @sensors = Sensor.all
     @data_collects = DataCollect.all
-    @temperature = DataCollect.where(sensor_id: Sensor.find_by(name: "TEMPDS").id)
-    @pressure = DataCollect.where(sensor_id: Sensor.find_by(name: "PRESSURE").id)
-    @methane_gas = DataCollect.where(sensor_id: Sensor.find_by(name: "CONCENTRATION").id)
-    @level = DataCollect.where(sensor_id: Sensor.find_by(name: "LEVEL").id)
-    @ph = DataCollect.where(sensor_id: Sensor.find_by(name: "PH").id)
+    @temperature = DataCollect.where(sensor_id: Sensor.find_by(name: "TEMPDS").id).last(50)
+    @pressure = DataCollect.where(sensor_id: Sensor.find_by(name: "PRESSURE").id).last(50)
+    @methane_gas = DataCollect.where(sensor_id: Sensor.find_by(name: "CONCENTRATION").id).last(50)
+    @level = DataCollect.where(sensor_id: Sensor.find_by(name: "LEVEL").id).last(50)
+    @ph = DataCollect.where(sensor_id: Sensor.find_by(name: "PH").id).last(50)
     @dataCollectedFromSensorsWithName = getDataCollectedFromSensorsWithName
   end
 
@@ -21,7 +21,7 @@ class DashboardsController < ApplicationController
   end
 
   def get_temperature
-    temperature = DataCollect.where(sensor_id: Sensor.find_by(name: "TEMPDS").id)
+    temperature = DataCollect.where(sensor_id: Sensor.find_by(name: "TEMPDS").id).last(50)
     render json: temperature.pluck(:data_measure, :value)
   end
 
