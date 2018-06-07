@@ -59,6 +59,13 @@ class SensorsController < ApplicationController
       @data_collects = DataCollect.all
     end
   end
+
+  def get_last_value
+    id = params[:id]
+    valor = DataCollect.where(sensor_id:id).last.value
+    json_response(valor)
+  end
+
   private
 
   def sensor_params

@@ -167,7 +167,7 @@
         </div>
       </div>
       <div class="panel-body">
-        <div id="chartContainer" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>
+        <div id="real_time" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>
       </div>
 
       <!-- Zoom Graph Highcharts -->
@@ -196,13 +196,19 @@
         </div>
       </div>
       <div class="panel-body">
-        <div id="container0" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+        <di+v id="container0" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
       </div>
     </div>
     <!-- /.col-lg-12 -->
   </div>
   <!-- /.row -->
 </div>
+
+<script>
+  // setTimeout(function(){
+  //    window.location.reload(1);
+  // }, 5000);
+</script>
 
 <script>
 // Zoom Graph CanvasJS Script
@@ -233,7 +239,7 @@ window.onload = function () {
   // Real Time CanvasJS Script
 
   var dps = []; // dataPoints
-  var chart = new CanvasJS.Chart("chartContainer", {
+  var chart = new CanvasJS.Chart("real_time", {
     axisY: {
       includeZero: false
     },
@@ -250,22 +256,27 @@ window.onload = function () {
   var dataLength = 20; // number of dataPoints visible at any point
 
   var updateChart = function (count) {
-
+    console.log("chamando o updatechart");
     count = count || 1;
 
-    for (var j = 0; j < count; j++) {
-      <% last = @data_collects.last.id %>
-      var kas = <% last%>
-      console.log(kas)
-      yVal = <%= DataCollect.find(last).value %>;
-      <% last -= 1 %>
+    // var url = '/sensor/' + userId + '/posts/create';
+    // var myLoc = { 'lat': 35, 'lon': -110 };
+
+    // $.ajax({
+    //   type: "GET",
+    //   url: url,
+    //   data: myLoc
+    // });
+    $.get('../get_data_collect_last/<%= @sensor.id %>', function(valor){
+      yVal = valor
       dps.push({
-        x: xVal,
-        y: yVal
+          x: xVal,
+          y: yVal
       });
       xVal++;
-    }
-
+    });
+    
+   
     if (dps.length > dataLength) {
       dps.shift();
     }

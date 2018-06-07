@@ -21,6 +21,9 @@ Rails.application.routes.draw do
   delete '/api/sensors/:sensor_id/data_collects/:id/' => 'data_collects#api_destroy'
 
 
+  get 'temperature' => 'dashboards#get_temperature' , as: 'get_temperature'
+  get 'get_data_collect_last/:id' => 'sensors#get_last_value'
+
   get '/sensors' => 'sensors#index', as: 'sensors'
   get '/sensors/:id' => 'sensors#show' , as: 'sensor'
 
