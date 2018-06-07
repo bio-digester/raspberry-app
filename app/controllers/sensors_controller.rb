@@ -1,36 +1,38 @@
 class SensorsController < ApplicationController
-  before_action :set_sensor
-  before_action :set_data_collect
+  before_action :set_sensor, except: [:api_index, :api_create]
+  before_action :set_data_collect, only: [:show]
+
 ######## METODOS PARA API #######
-  # # GET /sensors
-  # def index
-  #   @sensors = Sensor.all
-  #   json_response(@sensors)
-  # end
+  # # GET api/sensors
+  def api_index
+    @sensors = Sensor.all
+    json_response(@sensors)
+  end
   #
-  # # POST /sensors
-  # def create
-  #   @sensor = Sensor.create!(sensor_params)
-  #   json_response(@sensor, :created)
-  # end
+  # # POST api/sensors
+  def api_create
+    @sensor = Sensor.create!(sensor_params)
+    json_response(@sensor, :created)
+  end
   #
-  # # GET /sensors/:id
-  # def show
-  #   json_response(@sensor)
-  # end
+  # GET api/sensors/:id
+  def api_show
+    json_response(@sensor)
+  end
   #
-  # # PUT /sensors/:id
-  # def update
-  #   @sensor.update(sensor_params)
-  #   head :no_content
-  # end
+  # # PUT api/sensors/:id
+  def api_update
+    @sensor.update(sensor_params)
+    head :no_content
+  end
   #
-  # # DELETE /sensors/:id
-  # def destroy
-  #   @sensor.destroy
-  #   head :no_content
-  # end
+  # # DELETE api/sensors/:id
+  def api_destroy
+    @sensor.destroy
+    head :no_content
+  end
   ######## METODOS PARA API #######
+
   def show
     @sensors = Sensor.all
   end
