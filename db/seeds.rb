@@ -8,11 +8,11 @@ Sensor.create!([{ name: "TEMPDS", codename: "Temperatura" },
 
 
 Sensor.all.each do |f|
-  1000.times do
+  Faker::Number.between(200, 700).times do
     begin
       DataCollect.create!({
         value: Faker::Number.between(0.01, 1.5),
-        data_measure: Faker::Time.between(DateTime.now - 20, DateTime.now),
+        data_measure: DateTime.now + 40,
         sensor_id: f.id
         })
       end
