@@ -6,16 +6,17 @@
     <!-- /.col-lg-12 -->
   </div>
   <% if flash[:notice] %>
-  <div id="notice" class="alert alert-success">
-    <button type="button" class="close" data-dismiss="notice" aria-label="notice"><span aria-hidden="true">×</span>
-    </button>
+  <div id="notice" class="alert alert-success alert-dismissable">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
     <%= notice %>
   </div>
   <% end %>
-  <div class="alert alert-danger">
-    O Nível ultrapassou o limite de 70%, remova o biogás !.  <a data-toggle="modal" data-target="#myModal">
-              mais informações </a>
+
+  <div class="alert alert-danger alert-dismissable">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. <a data-toggle="modal" data-target="#myModal"> mais informações </a>
   </div>
+
   <!-- Modal -->
   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -55,11 +56,11 @@
             </div>
           </div>
         </div>
-          <div class="panel-footer">
-            <%= link_to "View Details", sensor_path(@sensors.find_by(name: "TEMPDS")) %>
-            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-            <div class="clearfix"></div>
-          </div>
+        <div class="panel-footer">
+          <%= link_to "View Details", sensor_path(@sensors.find_by(name: "TEMPDS")) %>
+          <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+          <div class="clearfix"></div>
+        </div>
       </div>
     </div>
 
@@ -78,11 +79,11 @@
             </div>
           </div>
         </div>
-          <div class="panel-footer">
-            <%= link_to "View Details", sensor_path(@sensors.find_by(name: "LEVEL")) %>
-            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-            <div class="clearfix"></div>
-          </div>
+        <div class="panel-footer">
+          <%= link_to "View Details", sensor_path(@sensors.find_by(name: "LEVEL")) %>
+          <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+          <div class="clearfix"></div>
+        </div>
       </div>
     </div>
 
@@ -101,11 +102,11 @@
             </div>
           </div>
         </div>
-          <div class="panel-footer">
-            <%= link_to "View Details", sensor_path(@sensors.find_by(name: "PRESSURE")) %>
-            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-            <div class="clearfix"></div>
-          </div>
+        <div class="panel-footer">
+          <%= link_to "View Details", sensor_path(@sensors.find_by(name: "PRESSURE")) %>
+          <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+          <div class="clearfix"></div>
+        </div>
       </div>
     </div>
 
@@ -125,11 +126,11 @@
             </div>
           </div>
         </div>
-          <div class="panel-footer">
-            <%= link_to "View Details", sensor_path(@sensors.find_by(name: "PH")) %>
-            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-            <div class="clearfix"></div>
-          </div>
+        <div class="panel-footer">
+          <%= link_to "View Details", sensor_path(@sensors.find_by(name: "PH")) %>
+          <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+          <div class="clearfix"></div>
+        </div>
       </div>
     </div>
 
@@ -149,11 +150,11 @@
             </div>
           </div>
         </div>
-          <div class="panel-footer">
-            <%= link_to "View Details", sensor_path(@sensors.find_by(name: "CONCENTRATION")) %>
-            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-            <div class="clearfix"></div>
-          </div>
+        <div class="panel-footer">
+          <%= link_to "View Details", sensor_path(@sensors.find_by(name: "CONCENTRATION")) %>
+          <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+          <div class="clearfix"></div>
+        </div>
       </div>
     </div>
 
