@@ -36,6 +36,8 @@ gem 'pg'
 gem 'jquery-rails'
 gem 'font-awesome-rails'
 gem 'bootstrap_sb_admin_base_v2'
+gem 'whenever', require: false
+gem 'rest-client'
 
 
 group :development, :test do
