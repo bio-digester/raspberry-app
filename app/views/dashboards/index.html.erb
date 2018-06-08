@@ -5,6 +5,13 @@
     </div>
     <!-- /.col-lg-12 -->
   </div>
+  <% if flash[:notice] %>
+  <div id="notice" class="alert alert-success">
+    <button type="button" class="close" data-dismiss="notice" aria-label="notice"><span aria-hidden="true">×</span>
+    </button>
+    <%= notice %>
+  </div>
+  <% end %>
   <div class="alert alert-danger">
     O Nível ultrapassou o limite de 70%, remova o biogás !.  <a data-toggle="modal" data-target="#myModal">
               mais informações </a>

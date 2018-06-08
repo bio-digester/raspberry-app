@@ -29,5 +29,6 @@ Rails.application.routes.draw do
 
   get '/temperature' => 'dashboards#get_temperature' , as: 'get_temperature'
 
+  get '/send_data' => 'sync#send_data', as: 'send_data'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
