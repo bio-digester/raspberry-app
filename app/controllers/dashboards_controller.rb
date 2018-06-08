@@ -20,9 +20,10 @@ class DashboardsController < ApplicationController
     return dataCollectedFromSensorsWithName
   end
 
-  def get_temperature
-    temperature = DataCollect.where(sensor_id: Sensor.find_by(name: "TEMPDS").id).last(50)
-    render json: temperature.pluck(:data_measure, :value)
+  def get_last_fifty
+    id = params[:id]
+    level = DataCollect.where(sensor_id: id).last(50)
+    render json: level.pluck(:data_measure, :value)  
   end
 
 end
