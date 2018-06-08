@@ -53,3 +53,9 @@ Executando o projeto
 ```rails s```
 
 Acesse a aplicação em localhost:3000
+
+Para executar a cron de sincronização de dados
+
+```whenever -c``` -> limpa todas as crons em execução
+
+```whenever -w``` -> cria a cron conforme a configuração no arquivo config/schedule.rb
