@@ -50,8 +50,13 @@
               <i class="fa fa-thermometer fa-2x"></i>
             </div>
             <div class="col-xs-9 text-right">
-              <div class="huge"><%= '%.2f' % @temperature.last.value%> ºC</div>
-              <%=@temperature.last.data_measure.strftime("%d/%m/%Y - %I:%M %p")%>
+              <% if @temperature.last != nil %>
+                <div class="huge"><%= '%.2f' % @temperature.last.value%> ºC</div>
+                <%=@temperature.last.data_measure.strftime("%d/%m/%Y - %I:%M %p")%>
+              <% else %>
+                <div class="huge"> 0 dados</div>
+              <% end %>
+              
               <div>Temperatura</div>
             </div>
           </div>
@@ -73,8 +78,12 @@
               <i class="fa fa-level-up fa-2x"></i>
             </div>
             <div class="col-xs-10 text-right">
-              <div class="huge"><%= '%.2f' % @level.last.value %> cm³</div>
-              <%=@level.last.data_measure.strftime("%d/%m/%Y - %I:%M %p")%>
+              <% if @level.last != nil %>
+                <div class="huge"><%= '%.2f' % @level.last.value %> cm³</div>
+                <%=@level.last.data_measure.strftime("%d/%m/%Y - %I:%M %p")%>
+              <% else %>
+                <div class="huge"> 0 dados</div>
+              <% end %>
               <div>Nível</div>
             </div>
           </div>
@@ -96,8 +105,12 @@
               <i class="fa fa-tachometer	 fa-2x"></i>
             </div>
             <div class="col-xs-10 text-right">
-              <div class="huge"><%='%.2f' %  @pressure.last.value %> kPa</div>
-              <%=@pressure.last.data_measure.strftime("%d/%m/%Y - %I:%M %p")%>
+              <% if @pressure.last != nil %>
+                <div class="huge"><%='%.2f' %  @pressure.last.value %> kPa</div>
+                <%=@pressure.last.data_measure.strftime("%d/%m/%Y - %I:%M %p")%>
+              <% else %>
+                <div class="huge"> 0 dados</div>
+              <% end %>
               <div>Pressão</div>
             </div>
           </div>
@@ -120,8 +133,12 @@
               <i class="fa fa-thermometer fa-2x"></i>
             </div>
             <div class="col-xs-9 text-right">
-              <div class="huge"><%= '%.5f' % @ph.last.value%></div>
-              <%=@ph.last.data_measure.strftime("%d/%m/%Y - %I:%M %p")%>
+              <% if @pressure.last != nil %>
+                <div class="huge"><%= '%.5f' % @ph.last.value%></div>
+                <%=@ph.last.data_measure.strftime("%d/%m/%Y - %I:%M %p")%>
+              <% else%>
+                <div class="huge"> 0 dados</div>
+              <% end %>
               <div>PH</div>
             </div>
           </div>
@@ -144,8 +161,12 @@
               <i class="fa fa-thermometer fa-2x"></i>
             </div>
             <div class="col-xs-9 text-right">
-              <div class="huge"><%= '%.5f' % @methane_gas.last.value%></div>
-              <%=@ph.last.data_measure.strftime("%d/%m/%Y - %I:%M %p")%>
+              <% if @methane_gas.last != nil %>
+                <div class="huge"><%= '%.5f' % @methane_gas.last.value%></div>
+                <%=@ph.last.data_measure.strftime("%d/%m/%Y - %I:%M %p")%>
+              <% else %>
+                <div class="huge"> 0 dados</div>
+              <% end %>
               <div>Concentração</div>
             </div>
           </div>
