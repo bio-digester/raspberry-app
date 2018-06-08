@@ -30,7 +30,7 @@ namespace :sync do
   end
 
   desc "Syncronize data"
-  task :sincronize_data => :environment do
+  task :synchronize_data => :environment do
     puts "====================================================Syncronize data===================================================="
     payload = {
       "water_flow": DataCollect.where(sensor_id: Sensor.find_by(name: "LEVEL").id).last.value,

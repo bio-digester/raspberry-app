@@ -13,8 +13,8 @@ class SyncController < ApplicationController
     end
   end
 
-  def sincronize_data
-    system "rake sync:sincronize_data"
+  def synchronize_data
+    system "rake sync:synchronize_data"
     respond_to do |format|
       format.html { redirect_to root_path, notice: 'Dados sincronizados com sucesso.' }
     end
