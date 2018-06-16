@@ -11,7 +11,6 @@ module RaspberryApp
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.1
     config.time_zone = "Brasilia"
-    config.active_record.observers = :notification_observer
 
 
     # Settings in config/environments/* take precedence over those specified here.

@@ -23,6 +23,7 @@ Rails.application.routes.draw do
 
   get 'get_last_fifty/:id' => 'dashboards#get_last_fifty' , as: 'get_last_fifty'
   get 'get_data_collect_last/:id' => 'sensors#get_last_value'
+  get 'get_last_notification/' => 'dashboards#get_last_notification', as: 'get_last_notification'
 
   get '/sensors' => 'sensors#index', as: 'sensors'
   get '/sensors/:id' => 'sensors#show' , as: 'sensor'

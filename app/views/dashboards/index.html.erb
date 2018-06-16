@@ -12,10 +12,12 @@
   </div>
   <% end %>
 
+  <% if @notification %>
   <div class="alert alert-danger alert-dismissable">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. <a data-toggle="modal" data-target="#myModal"> mais informações </a>
+    <p id = "notification"></p> <a data-toggle="modal" data-target="#myModal"> mais informações </a>
   </div>
+  <% end %>
 
   <!-- Modal -->
   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -51,12 +53,12 @@
             </div>
             <div class="col-xs-9 text-right">
               <% if @temperature.last != nil %>
-                <div class="huge"><%= '%.2f' % @temperature.last.value%> ºC</div>
-                <%=@temperature.last.data_measure.strftime("%d/%m/%Y - %I:%M %p")%>
+              <div class="huge"><%= '%.2f' % @temperature.last.value%> ºC</div>
+              <%=@temperature.last.data_measure.strftime("%d/%m/%Y - %I:%M %p")%>
               <% else %>
-                <div class="huge"> 0 dados</div>
+              <div class="huge"> 0 dados</div>
               <% end %>
-              
+
               <div>Temperatura</div>
             </div>
           </div>
@@ -79,10 +81,10 @@
             </div>
             <div class="col-xs-10 text-right">
               <% if @level.last != nil %>
-                <div class="huge"><%= '%.2f' % @level.last.value %> cm³</div>
-                <%=@level.last.data_measure.strftime("%d/%m/%Y - %I:%M %p")%>
+              <div class="huge"><%= '%.2f' % @level.last.value %> cm³</div>
+              <%=@level.last.data_measure.strftime("%d/%m/%Y - %I:%M %p")%>
               <% else %>
-                <div class="huge"> 0 dados</div>
+              <div class="huge"> 0 dados</div>
               <% end %>
               <div>Nível</div>
             </div>
@@ -106,10 +108,10 @@
             </div>
             <div class="col-xs-10 text-right">
               <% if @pressure.last != nil %>
-                <div class="huge"><%='%.2f' %  @pressure.last.value %> kPa</div>
-                <%=@pressure.last.data_measure.strftime("%d/%m/%Y - %I:%M %p")%>
+              <div class="huge"><%='%.2f' %  @pressure.last.value %> kPa</div>
+              <%=@pressure.last.data_measure.strftime("%d/%m/%Y - %I:%M %p")%>
               <% else %>
-                <div class="huge"> 0 dados</div>
+              <div class="huge"> 0 dados</div>
               <% end %>
               <div>Pressão</div>
             </div>
@@ -133,11 +135,11 @@
               <i class="fa fa-thermometer fa-2x"></i>
             </div>
             <div class="col-xs-9 text-right">
-              <% if @pressure.last != nil %>
-                <div class="huge"><%= '%.5f' % @ph.last.value%></div>
-                <%=@ph.last.data_measure.strftime("%d/%m/%Y - %I:%M %p")%>
+              <% if @ph.last != nil %>
+              <div class="huge"><%= '%.5f' % @ph.last.value%></div>
+              <%=@ph.last.data_measure.strftime("%d/%m/%Y - %I:%M %p")%>
               <% else%>
-                <div class="huge"> 0 dados</div>
+              <div class="huge"> 0 dados</div>
               <% end %>
               <div>PH</div>
             </div>
@@ -162,10 +164,10 @@
             </div>
             <div class="col-xs-9 text-right">
               <% if @methane_gas.last != nil %>
-                <div class="huge"><%= '%.5f' % @methane_gas.last.value%></div>
-                <%=@ph.last.data_measure.strftime("%d/%m/%Y - %I:%M %p")%>
+              <div class="huge"><%= '%.5f' % @methane_gas.last.value%></div>
+              <%=@methane_gas.last.data_measure.strftime("%d/%m/%Y - %I:%M %p")%>
               <% else %>
-                <div class="huge"> 0 dados</div>
+              <div class="huge"> 0 dados</div>
               <% end %>
               <div>Concentração</div>
             </div>
@@ -186,167 +188,167 @@
 
       <!-- Grafico Temperatura -->
       <% if @temperature.last != nil %>
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <i class="fa fa-bar-chart-o fa-fw"></i> Temperatura Vs Tempo
-            <div class="pull-right">
-              <div class="btn-group">
-                <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
-                  Actions
-                  <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu pull-right" role="menu">
-                  <li><a href="#">Action</a>
-                  </li>
-                  <li><a href="#">Another action</a>
-                  </li>
-                  <li><a href="#">Something else here</a>
-                  </li>
-                  <li class="divider"></li>
-                  <li><a href="#">Separated link</a>
-                  </li>
-                </ul>
-              </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <i class="fa fa-bar-chart-o fa-fw"></i> Temperatura Vs Tempo
+          <div class="pull-right">
+            <div class="btn-group">
+              <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                Actions
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu pull-right" role="menu">
+                <li><a href="#">Action</a>
+                </li>
+                <li><a href="#">Another action</a>
+                </li>
+                <li><a href="#">Something else here</a>
+                </li>
+                <li class="divider"></li>
+                <li><a href="#">Separated link</a>
+                </li>
+              </ul>
             </div>
           </div>
-          <!-- /.panel-heading -->
-          <div class="panel-body">
-            <div id="morris-area-chart"><%= line_chart get_last_fifty_path(:id => @sensors.find_by(name: "TEMPDS")), adapter: "highcharts", refresh: 5%></div>
-          </div>
-          <!-- /.panel-body -->
         </div>
+        <!-- /.panel-heading -->
+        <div class="panel-body">
+          <div id="morris-area-chart"><%= line_chart get_last_fifty_path(:id => @sensors.find_by(name: "TEMPDS")), adapter: "highcharts", refresh: 5%></div>
+        </div>
+        <!-- /.panel-body -->
+      </div>
       <% end %>
 
       <!-- Gráfico Nível -->
       <% if @level.last != nil %>
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <i class="fa fa-bar-chart-o fa-fw"></i> Nível Vs Tempo
-            <div class="pull-right">
-              <div class="btn-group">
-                <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
-                  Actions
-                  <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu pull-right" role="menu">
-                  <li><a href="#">Action</a>
-                  </li>
-                  <li><a href="#">Another action</a>
-                  </li>
-                  <li><a href="#">Something else here</a>
-                  </li>
-                  <li class="divider"></li>
-                  <li><a href="#">Separated link</a>
-                  </li>
-                </ul>
-              </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <i class="fa fa-bar-chart-o fa-fw"></i> Nível Vs Tempo
+          <div class="pull-right">
+            <div class="btn-group">
+              <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                Actions
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu pull-right" role="menu">
+                <li><a href="#">Action</a>
+                </li>
+                <li><a href="#">Another action</a>
+                </li>
+                <li><a href="#">Something else here</a>
+                </li>
+                <li class="divider"></li>
+                <li><a href="#">Separated link</a>
+                </li>
+              </ul>
             </div>
           </div>
-          <!-- /.panel-heading -->
-          <div class="panel-body">
-            <div id="morris-area-chart"><%= line_chart get_last_fifty_path(:id => @sensors.find_by(name: "LEVEL")), adapter: "highcharts", refresh: 5%></div>
-          </div>
-          <!-- /.panel-body -->
         </div>
+        <!-- /.panel-heading -->
+        <div class="panel-body">
+          <div id="morris-area-chart"><%= line_chart get_last_fifty_path(:id => @sensors.find_by(name: "LEVEL")), adapter: "highcharts", refresh: 5%></div>
+        </div>
+        <!-- /.panel-body -->
+      </div>
       <% end %>
 
       <!-- Gráfico Pressão -->
       <% if @pressure.last != nil %>
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <i class="fa fa-bar-chart-o fa-fw"></i> Pressão Vs Tempo
-            <div class="pull-right">
-              <div class="btn-group">
-                <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
-                  Actions
-                  <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu pull-right" role="menu">
-                  <li><a href="#">Action</a>
-                  </li>
-                  <li><a href="#">Another action</a>
-                  </li>
-                  <li><a href="#">Something else here</a>
-                  </li>
-                  <li class="divider"></li>
-                  <li><a href="#">Separated link</a>
-                  </li>
-                </ul>
-              </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <i class="fa fa-bar-chart-o fa-fw"></i> Pressão Vs Tempo
+          <div class="pull-right">
+            <div class="btn-group">
+              <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                Actions
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu pull-right" role="menu">
+                <li><a href="#">Action</a>
+                </li>
+                <li><a href="#">Another action</a>
+                </li>
+                <li><a href="#">Something else here</a>
+                </li>
+                <li class="divider"></li>
+                <li><a href="#">Separated link</a>
+                </li>
+              </ul>
             </div>
           </div>
-          <!-- /.panel-heading -->
-          <div class="panel-body">
-            <div id="morris-area-chart"><%= line_chart get_last_fifty_path(:id => @sensors.find_by(name: "PRESSURE")), adapter: "highcharts", refresh: 5%></div>
-          </div>
-          <!-- /.panel-body -->
         </div>
+        <!-- /.panel-heading -->
+        <div class="panel-body">
+          <div id="morris-area-chart"><%= line_chart get_last_fifty_path(:id => @sensors.find_by(name: "PRESSURE")), adapter: "highcharts", refresh: 5%></div>
+        </div>
+        <!-- /.panel-body -->
+      </div>
       <% end %>
 
       <!-- Gráfico de pH -->
       <% if @ph.last != nil %>
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <i class="fa fa-bar-chart-o fa-fw"></i> pH Vs Tempo
-            <div class="pull-right">
-              <div class="btn-group">
-                <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
-                  Actions
-                  <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu pull-right" role="menu">
-                  <li><a href="#">Action</a>
-                  </li>
-                  <li><a href="#">Another action</a>
-                  </li>
-                  <li><a href="#">Something else here</a>
-                  </li>
-                  <li class="divider"></li>
-                  <li><a href="#">Separated link</a>
-                  </li>
-                </ul>
-              </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <i class="fa fa-bar-chart-o fa-fw"></i> pH Vs Tempo
+          <div class="pull-right">
+            <div class="btn-group">
+              <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                Actions
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu pull-right" role="menu">
+                <li><a href="#">Action</a>
+                </li>
+                <li><a href="#">Another action</a>
+                </li>
+                <li><a href="#">Something else here</a>
+                </li>
+                <li class="divider"></li>
+                <li><a href="#">Separated link</a>
+                </li>
+              </ul>
             </div>
           </div>
-          <!-- /.panel-heading -->
-          <div class="panel-body">
-            <div id="morris-area-chart"><%= line_chart get_last_fifty_path(:id => @sensors.find_by(name: "PH")), adapter: "highcharts", refresh: 5%></div>
-          </div>
-          <!-- /.panel-body -->
         </div>
+        <!-- /.panel-heading -->
+        <div class="panel-body">
+          <div id="morris-area-chart"><%= line_chart get_last_fifty_path(:id => @sensors.find_by(name: "PH")), adapter: "highcharts", refresh: 5%></div>
+        </div>
+        <!-- /.panel-body -->
+      </div>
       <% end %>
 
       <!-- Gráfico de Concentração -->
       <% if @methane_gas.last != nil %>
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <i class="fa fa-bar-chart-o fa-fw"></i> Concentração Vs Tempo
-            <div class="pull-right">
-              <div class="btn-group">
-                <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
-                  Actions
-                  <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu pull-right" role="menu">
-                  <li><a href="#">Action</a>
-                  </li>
-                  <li><a href="#">Another action</a>
-                  </li>
-                  <li><a href="#">Something else here</a>
-                  </li>
-                  <li class="divider"></li>
-                  <li><a href="#">Separated link</a>
-                  </li>
-                </ul>
-              </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <i class="fa fa-bar-chart-o fa-fw"></i> Concentração Vs Tempo
+          <div class="pull-right">
+            <div class="btn-group">
+              <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                Actions
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu pull-right" role="menu">
+                <li><a href="#">Action</a>
+                </li>
+                <li><a href="#">Another action</a>
+                </li>
+                <li><a href="#">Something else here</a>
+                </li>
+                <li class="divider"></li>
+                <li><a href="#">Separated link</a>
+                </li>
+              </ul>
             </div>
           </div>
-          <!-- /.panel-heading -->
-          <div class="panel-body">
-            <div id="morris-area-chart"><%= line_chart get_last_fifty_path(:id => @sensors.find_by(name: "CONCENTRATION")), adapter: "highcharts", refresh: 5%></div>
-          </div>
-          <!-- /.panel-body -->
         </div>
+        <!-- /.panel-heading -->
+        <div class="panel-body">
+          <div id="morris-area-chart"><%= line_chart get_last_fifty_path(:id => @sensors.find_by(name: "CONCENTRATION")), adapter: "highcharts", refresh: 5%></div>
+        </div>
+        <!-- /.panel-body -->
+      </div>
       <% end %>
 
       <!-- /.panel -->
@@ -517,6 +519,21 @@
 
 </div>
 <!-- /#wrapper -->
+<script>
+ setInterval(updateNotification, 5000);
+
+function updateNotification(){
+  $.getJSON('http://localhost:3000/get_last_notification', function(data){
+    if (data != '<%= @notification %>') {
+      console.log(data);
+      document.getElementById("notification").innerHTML = data;
+    } else {
+      console.log('<%= @notification %>');
+      document.getElementById("notification").innerHTML = '<%= @notification %>';
+    }
+  });
+  }
+</script>
 
 <!-- jQuery -->
 <!-- <script src="../vendor/jquery/jquery.min.js"></script> -->

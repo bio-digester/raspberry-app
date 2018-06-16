@@ -9,6 +9,7 @@ class DashboardsController < ApplicationController
     @level = DataCollect.where(sensor_id: Sensor.find_by(name: "LEVEL").id).last(50)
     @ph = DataCollect.where(sensor_id: Sensor.find_by(name: "PH").id).last(50)
     @dataCollectedFromSensorsWithName = getDataCollectedFromSensorsWithName
+    @notification = Notification.last.message
   end
 
   def getDataCollectedFromSensorsWithName
@@ -23,7 +24,12 @@ class DashboardsController < ApplicationController
   def get_last_fifty
     id = params[:id]
     level = DataCollect.where(sensor_id: id).last(50)
-    render json: level.pluck(:data_measure, :value)  
+    render json: level.pluck(:data_measure, :value)
+  end
+
+  def get_last_notification
+    @notification = Notification.last
+    render json: @notification.message.to_json
   end
 
 end
