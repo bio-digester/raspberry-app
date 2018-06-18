@@ -22,8 +22,28 @@ class DashboardsController < ApplicationController
 
   def get_last_fifty
     id = params[:id]
-    level = DataCollect.where(sensor_id: id).last(50)
-    render json: level.pluck(:data_measure, :value)  
+    datas = DataCollect.where(sensor_id: id).last(50)
+    datas = formatTime(datas)
+    
+    render json: datas.pluck(:data_measure, :value)  
+  end
+
+  private
+  def formatTime(datas)
+    datas.each { |data| 
+      y = data.data_measure.to_s
+      values = y.split(" ")
+      dayMonthYear = formatToBrazilianTime(values[0])
+     
+      data.data_measure = dayMonthYear + ' | ' + values[1]
+    }
+    return datas
+  end
+
+  def formatToBrazilianTime(unformatedData)
+    values = unformatedData.split("-")
+    formatedData = values[2] + "-" + values[1] + "-" + values[0]
+    return formatedData
   end
 
 end

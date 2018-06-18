@@ -1,7 +1,7 @@
 <div id="page-wrapper">
   <div class="row">
     <div class="col-lg-12">
-      <h1 class="page-header">System Overview</h1>
+      <h1 class="page-header">Visão geral do sistema</h1>
     </div>
     <!-- /.col-lg-12 -->
   </div>
@@ -162,7 +162,7 @@
             </div>
             <div class="col-xs-9 text-right">
               <% if @methane_gas.last != nil %>
-                <div class="huge"><%= '%.5f' % @methane_gas.last.value%></div>
+                <div class="huge"><%= '%.2f' % @methane_gas.last.value%> ppm</div>
                 <%=@ph.last.data_measure.strftime("%d/%m/%Y - %I:%M %p")%>
               <% else %>
                 <div class="huge"> 0 dados</div>
@@ -516,6 +516,34 @@
 <!-- /#page-wrapper -->
 
 </div>
+<script>
+  $( document ).ready(function() {
+    var highchartsOptions = Highcharts.setOptions({
+      lang: {
+            loading: 'Aguarde...',
+            months: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+            weekdays: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+            shortMonths: ['Jan', 'Fev', 'Mar', 'Abr', 'Maio', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+            exportButtonTitle: "Exportar",
+            printButtonTitle: "Imprimir",
+            rangeSelectorFrom: "De",
+            rangeSelectorTo: "Até",
+            rangeSelectorZoom: "Periodo",
+            downloadPNG: 'Download imagem PNG',
+            downloadJPEG: 'Download imagem JPEG',
+            downloadPDF: 'Download documento PDF',
+            downloadSVG: 'Download imagem SVG'
+            // resetZoom: "Reset",
+            // resetZoomTitle: "Reset,
+            // thousandsSep: ".",
+            // decimalPoint: ','
+            }
+      }
+  );
+
+  });
+</script>
+
 <!-- /#wrapper -->
 
 <!-- jQuery -->
