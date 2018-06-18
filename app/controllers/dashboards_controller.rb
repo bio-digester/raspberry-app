@@ -1,5 +1,5 @@
 class DashboardsController < ApplicationController
-
+  # before_action :index, only: [:get_last_notification]
   def index
     @sensors = Sensor.all
     @data_collects = DataCollect.all
@@ -9,7 +9,6 @@ class DashboardsController < ApplicationController
     @level = DataCollect.where(sensor_id: Sensor.find_by(name: "LEVEL").id).last(50)
     @ph = DataCollect.where(sensor_id: Sensor.find_by(name: "PH").id).last(50)
     @dataCollectedFromSensorsWithName = getDataCollectedFromSensorsWithName
-    @notification = Notification.last.message
   end
 
   def getDataCollectedFromSensorsWithName
@@ -28,8 +27,14 @@ class DashboardsController < ApplicationController
   end
 
   def get_last_notification
-    @notification = Notification.last
-    render json: @notification.message.to_json
+    notifications = Notification.where(visualized: false)
+    @messages = []
+    notifications.each do |notification|
+      @messages << notification.message
+    end
+    respond_to do |format|
+      format.html { redirect_to root_path, alert: @messages }
+    end
   end
 
 end

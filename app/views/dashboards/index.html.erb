@@ -12,12 +12,14 @@
   </div>
   <% end %>
 
-  <% if @notification %>
+  <% if flash[:alert] %>
+  <h2>Você possui <%= flash[:alert].size %> notificações</h2>
+  <% flash[:alert].each do |notification| %>
+
   <div class="alert alert-danger alert-dismissable">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-    <p id = "notification"></p> <a data-toggle="modal" data-target="#myModal"> mais informações </a>
+    <%= notification %> <a data-toggle="modal" data-target="#myModal"> mais informações </a>
   </div>
-  <% end %>
 
   <!-- Modal -->
   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -25,14 +27,13 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-          <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+          <h4 class="modal-title" id="myModalLabel">Detalhes da Notificação</h4>
         </div>
         <div class="modal-body">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          <%= notification %>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
         </div>
       </div>
       <!-- /.modal-content -->
@@ -40,6 +41,8 @@
     <!-- /.modal-dialog -->
   </div>
   <!-- /.modal -->
+  <% end %>
+  <% end %>
   <!-- /.row -->
   <div class="row">
 
@@ -520,19 +523,12 @@
 </div>
 <!-- /#wrapper -->
 <script>
- setInterval(updateNotification, 5000);
+console.log("entrou no script")
+setInterval(updateNotification, 5000);
 
 function updateNotification(){
-  $.getJSON('http://localhost:3000/get_last_notification', function(data){
-    if (data != '<%= @notification %>') {
-      console.log(data);
-      document.getElementById("notification").innerHTML = data;
-    } else {
-      console.log('<%= @notification %>');
-      document.getElementById("notification").innerHTML = '<%= @notification %>';
-    }
-  });
-  }
+  document.location.href = "get_last_notification";
+}
 </script>
 
 <!-- jQuery -->
