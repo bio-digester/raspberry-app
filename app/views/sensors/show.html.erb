@@ -212,8 +212,8 @@
 
 <script>
 // Zoom Graph CanvasJS Script
-window.onload = function () {
-
+$( document ).ready(function() {
+  console.log("carregou o onload");
   var chart1 = new CanvasJS.Chart("chartContainer1", {
     theme: "light2", // "light1", "light2", "dark1", "dark2"
     animationEnabled: true,
@@ -235,7 +235,11 @@ window.onload = function () {
       xVal1++;
     }
   }
+});
+</script>
 
+<script>
+$( document ).ready(function() {
   // Real Time CanvasJS Script
 
   var dps = []; // dataPoints
@@ -259,14 +263,6 @@ window.onload = function () {
     console.log("chamando o updatechart");
     count = count || 1;
 
-    // var url = '/sensor/' + userId + '/posts/create';
-    // var myLoc = { 'lat': 35, 'lon': -110 };
-
-    // $.ajax({
-    //   type: "GET",
-    //   url: url,
-    //   data: myLoc
-    // });
     $.get('../get_data_collect_last/<%= @sensor.id %>', function(valor){
       yVal = valor
       dps.push({
@@ -287,7 +283,7 @@ window.onload = function () {
   updateChart(dataLength);
   setInterval(function(){updateChart()}, updateInterval);
 
-}
+});
 </script>
 
 <script type="text/javascript">
