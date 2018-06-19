@@ -34,5 +34,6 @@ Rails.application.routes.draw do
   get '/sync/send_data' => 'sync#send_data', as: 'send_data'
   get '/sync/retrieve_data' => 'sync#retrieve_data', as: 'retrieve_data'
   get '/sync/' => 'sync#synchronize_data', as: 'synchronize_data'
+  patch '/notifications/:id/to_view' => 'notifications#to_view', as: 'to_view'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

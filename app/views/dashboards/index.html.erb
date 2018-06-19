@@ -15,10 +15,9 @@
   <% if flash[:alert] %>
   <h2>Você possui <%= flash[:alert].size %> notificações</h2>
   <% flash[:alert].each do |notification| %>
-
   <div class="alert alert-danger alert-dismissable">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-    <%= notification %> <a data-toggle="modal" data-target="#myModal"> mais informações </a>
+    <%= notification['message'] %> <a data-toggle="modal" data-target="#myModal"> mais informações </a>
   </div>
 
   <!-- Modal -->
@@ -30,10 +29,10 @@
           <h4 class="modal-title" id="myModalLabel">Detalhes da Notificação</h4>
         </div>
         <div class="modal-body">
-          <%= notification %>
+          <%= notification['message'] %>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <%= button_to "Close", to_view_path(notification['id']), :method => "patch" %>
         </div>
       </div>
       <!-- /.modal-content -->

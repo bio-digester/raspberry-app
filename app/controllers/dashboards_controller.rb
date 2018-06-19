@@ -27,13 +27,9 @@ class DashboardsController < ApplicationController
   end
 
   def get_last_notification
-    notifications = Notification.where(visualized: false)
-    @messages = []
-    notifications.each do |notification|
-      @messages << notification.message
-    end
+    @notifications = Notification.where(visualized: false)
     respond_to do |format|
-      format.html { redirect_to root_path, alert: @messages }
+      format.html { redirect_to root_path, alert: @notifications }
     end
   end
 
