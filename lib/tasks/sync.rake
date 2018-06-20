@@ -2,16 +2,16 @@ namespace :sync do
   desc "Send data to server"
   task :send_data => :environment do
     puts "====================================================Send data===================================================="
-    payload = {
+    payload = [{
       "water_flow": DataCollect.where(sensor_id: Sensor.find_by(name: "LEVEL").id).last.value,
       "temperature": DataCollect.where(sensor_id: Sensor.find_by(name: "TEMPDS").id).last.value,
       "internal_pressure": DataCollect.where(sensor_id: Sensor.find_by(name: "PRESSURE").id).last.value,
       "ph": DataCollect.where(sensor_id: Sensor.find_by(name: "PH").id).last.value,
       "volume": DataCollect.where(sensor_id: Sensor.find_by(name: "LEVEL").id).last.value,
       "gas_production": DataCollect.where(sensor_id: Sensor.find_by(name: "CONCENTRATION").id).last.value
-    }
+    }]
     begin
-      response = RestClient.post("http://localhost:8999/api/biodigesters/", payload.to_json, content_type: :json)
+      response = RestClient.post("http://35.231.177.140/api/samples/", payload.to_json, content_type: :json)
       puts response
     rescue  RestClient::ExceptionWithResponse => e
       puts e.response
@@ -22,8 +22,13 @@ namespace :sync do
   task :retrieve_data => :environment do
     puts "====================================================Retrieve data===================================================="
     begin
-      response = RestClient.get("http://localhost:8999/api/biodigesters/")
-      puts response
+      response = RestClient.get("http://35.231.177.140/api/optimize/")
+      response = JSON.parse(response)
+      response.each do |r|
+        puts "Cadastrando Optimization"
+        puts r
+        Optimization.create(r)
+      end
     rescue  RestClient::ExceptionWithResponse => e
       puts e.response
     end
@@ -32,21 +37,26 @@ namespace :sync do
   desc "Syncronize data"
   task :synchronize_data => :environment do
     puts "====================================================Syncronize data===================================================="
-    payload = {
+    payload = [{
       "water_flow": DataCollect.where(sensor_id: Sensor.find_by(name: "LEVEL").id).last.value,
       "temperature": DataCollect.where(sensor_id: Sensor.find_by(name: "TEMPDS").id).last.value,
       "internal_pressure": DataCollect.where(sensor_id: Sensor.find_by(name: "PRESSURE").id).last.value,
       "ph": DataCollect.where(sensor_id: Sensor.find_by(name: "PH").id).last.value,
       "volume": DataCollect.where(sensor_id: Sensor.find_by(name: "LEVEL").id).last.value,
       "gas_production": DataCollect.where(sensor_id: Sensor.find_by(name: "CONCENTRATION").id).last.value
-    }
+    }]
     begin
       puts "====================================================Send data===================================================="
-      response = RestClient.post("http://localhost:8999/api/biodigesters/", payload.to_json, content_type: :json)
+      response = RestClient.post("http://35.231.177.140/api/samples/", payload.to_json, content_type: :json)
       puts response
       puts "====================================================Retrieve data===================================================="
-      response = RestClient.get("http://localhost:8999/api/biodigesters/")
-      puts response
+      response = RestClient.get("http://35.231.177.140/api/optimize/")
+      response = JSON.parse(response)
+      response.each do |r|
+        puts "Cadastrando Optimization"
+        puts r
+        Optimization.create(r)
+      end
     rescue  RestClient::ExceptionWithResponse => e
       puts e.response
     end

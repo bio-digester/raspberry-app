@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180609191818) do
+ActiveRecord::Schema.define(version: 20180620194501) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,14 @@ ActiveRecord::Schema.define(version: 20180609191818) do
     t.boolean "visualized", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "optimizations", force: :cascade do |t|
+    t.string "temperature"
+    t.string "internal_pressure"
+    t.string "ph"
+    t.string "volume"
+    t.string "prediction"
   end
 
   create_table "sensors", force: :cascade do |t|
