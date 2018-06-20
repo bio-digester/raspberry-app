@@ -6,7 +6,7 @@ namespace :message do
     hostname = '127.0.0.1'
     port = 6500
     s = TCPSocket.open(hostname, port)
-    s.send('O usuário irá remover o biogás da câmara de gás !',0)
+    s.send('REMOVE 0',0)
     s.close
     end
 end

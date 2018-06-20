@@ -2,7 +2,7 @@ class NotificationsController < ApplicationController
 before_action :set_notification
   def to_view
     @notification.update_attribute(:visualized, true)
-    if @notification.message == "O usuário irá remover o biogás da câmara de gás !"
+    if @notification.message == "[ALERT] O biogás está pronto para ser retirado" || @notification.message == "[DANGER] Retire urgentemente o biogás"
       system "rake message:send_socket_message"
     end
   end
