@@ -1,5 +1,5 @@
 class DashboardsController < ApplicationController
-
+  # before_action :index, only: [:get_last_notification]
   def index
     @sensors = Sensor.all
     @data_collects = DataCollect.all
@@ -26,6 +26,12 @@ class DashboardsController < ApplicationController
     datas = formatTime(datas)
     
     render json: datas.pluck(:data_measure, :value)  
+  end
+
+  def get_last_notification
+    @notifications = Notification.where(visualized: false)
+    respond_to do |format|
+      format.html { redirect_to root_path, alert: @notifications }
   end
 
   private

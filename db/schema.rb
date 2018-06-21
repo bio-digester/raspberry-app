@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180504184417) do
+ActiveRecord::Schema.define(version: 20180620194501) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,20 @@ ActiveRecord::Schema.define(version: 20180504184417) do
     t.string "value"
     t.bigint "sensor_id"
     t.index ["sensor_id"], name: "index_data_collects_on_sensor_id"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.string "message"
+    t.boolean "visualized", default: false
+    t.datetime "message_date"
+  end
+
+  create_table "optimizations", force: :cascade do |t|
+    t.string "temperature"
+    t.string "internal_pressure"
+    t.string "ph"
+    t.string "volume"
+    t.string "prediction"
   end
 
   create_table "sensors", force: :cascade do |t|
