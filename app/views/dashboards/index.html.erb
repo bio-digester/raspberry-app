@@ -25,10 +25,10 @@
           <h4 class="modal-title" id="myModalLabel">Detalhes da Notificação</h4>
         </div>
         <div class="modal-body">
-          
+
         </div>
         <div class="modal-footer">
-          
+
         </div>
       </div>
       <!-- /.modal-content -->
@@ -36,7 +36,7 @@
     <!-- /.modal-dialog -->
   </div>
   <!-- /.modal -->
-  
+
   <!-- /.row -->
   <div class="row">
 
@@ -190,7 +190,7 @@
           <i class="fa fa-bar-chart-o fa-fw"></i> Temperatura Vs Tempo
           <div class="pull-right">
             <div class="btn-group">
-              
+
             </div>
           </div>
         </div>
@@ -211,7 +211,7 @@
           <i class="fa fa-bar-chart-o fa-fw"></i> Nível Vs Tempo
           <div class="pull-right">
             <div class="btn-group">
-              
+
             </div>
           </div>
         </div>
@@ -248,7 +248,7 @@
           <i class="fa fa-bar-chart-o fa-fw"></i> pH Vs Tempo
           <div class="pull-right">
             <div class="btn-group">
-              
+
             </div>
           </div>
         </div>
@@ -267,7 +267,7 @@
           <i class="fa fa-bar-chart-o fa-fw"></i> Concentração Vs Tempo
           <div class="pull-right">
             <div class="btn-group">
-              
+
             </div>
           </div>
         </div>
@@ -285,7 +285,7 @@
           <i class="fa fa-bar-chart-o fa-fw"></i> Volume de Dados Coletados / Dia
           <div class="pull-right">
             <div class="btn-group">
-              
+
             </div>
           </div>
         </div>
@@ -294,10 +294,10 @@
           <div id="morris-bar-chart"><%= column_chart @data_collects.group_by_day(:data_measure).count %></div>
         </div>
         <!-- /.panel-body -->
-      
+
     </div>
     <!-- /.col-lg-8 -->
-    
+
   </div>
 
   <div class="col-lg-4">
@@ -358,7 +358,7 @@ setInterval(updateNotification, 1000);
 
 function preparaDiv(id, message){
   div = document.createElement("div");
-  
+
   div.id = id
   div.classList.add("alert");
   div.classList.add("alert-danger");
@@ -448,17 +448,32 @@ function criaDivBody(message){
   return divBody;
 }
 
-function criaDivFooter(id){
+function criaDivFooter(id, message){
   divFooter = document.createElement("div");
   divFooter.classList.add("modal-footer");
 
   botaoFecharModal = document.createElement("button");
+  botaoFecharModal.setAttribute("data-toggle" , "modal");
+  botaoFecharModal.setAttribute("data-target" , "#myModal" + id);
+
   botaoFecharModal.innerHTML = "Marcar como lido";
   botaoFecharModal.onclick = function() { lerNotificacao(id) };
+
+  if(message.localeCompare("[ALERT] O biogás está pronto para ser retirado") == 0 ){
+    botaoFecharModal.innerHTML = "Gás removido";
+    botaoAux = document.createElement("button");
+    botaoAux.innerHTML = "Remover Gás";
+    botaoAux.onclick = function(){ mandaProVinicius()}
+    divFooter.appendChild(botaoAux);
+  }
 
   divFooter.appendChild(botaoFecharModal);
 
   return divFooter;
+}
+
+function mandaProVinicius(){
+  $.get('../send_first_socket_message', function(retorno){});
 }
 
 function lerNotificacao(id){
@@ -496,9 +511,9 @@ function updateNotification(){
       }
 
       var h2 = document.getElementById('tituloH2')
-      h2.style.display = "block";      
+      h2.style.display = "block";
       h2.innerHTML = "Você possui " + notificacoes.length +  " notificações"
-      
+
 
       notificacaoDiv.style.display = "inline-block";
 
@@ -515,17 +530,19 @@ function updateNotification(){
 
             divHeader = criaDivHeader();
             divBody = criaDivBody(notificacoes[vezAtual].message);
-            divFooter = criaDivFooter(notificacoes[vezAtual].id);
+
+            divFooter = criaDivFooter(notificacoes[vezAtual].id,
+                                      notificacoes[vezAtual].message );
 
             divFilhaFilha.appendChild(divHeader);
-            divFilhaFilha.appendChild(divBody);        
+            divFilhaFilha.appendChild(divBody);
             divFilhaFilha.appendChild(divFooter);
             divFilha.appendChild(divFilhaFilha);
             modalPai.appendChild(divFilha);
             div.appendChild(botao);
             div.appendChild(a);
-            document.getElementById('notificacaoDiv').appendChild(div); 
-            document.getElementById('page-wrapper').appendChild(modalPai); 
+            document.getElementById('notificacaoDiv').appendChild(div);
+            document.getElementById('page-wrapper').appendChild(modalPai);
 
             vezAtual++;
             id++;
@@ -537,7 +554,7 @@ function updateNotification(){
       notificacaoDiv.style.display = "none";
       document.getElementById('tituloH2').style.display = "none";
     }
-    
+
   });
   // document.location.href = "http://localhost:3000/get_last_notification";
 }

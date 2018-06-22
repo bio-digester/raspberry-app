@@ -13,4 +13,8 @@ class NotificationsController < ApplicationController
     notificacao.save()
   end
 
+  def send_first_socket_message
+    system "rake message:send_first_socket_message"
+  end
+
 end

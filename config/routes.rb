@@ -25,6 +25,8 @@ Rails.application.routes.draw do
   get 'get_data_collect_last/:id' => 'sensors#get_last_value'
   get 'get_last_notification/' => 'notifications#get_last_notification', as: 'get_last_notification'
   get 'read_notification/' => 'notifications#read_notification'
+  get 'send_first_socket_message/' => 'notifications#send_first_socket_message', as: 'send_first_socket_message'
+
 
   get '/sensors' => 'sensors#index', as: 'sensors'
   get '/sensors/:id' => 'sensors#show' , as: 'sensor'
