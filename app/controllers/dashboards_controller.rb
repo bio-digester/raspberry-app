@@ -17,7 +17,7 @@ class DashboardsController < ApplicationController
     for sensor in dataCollectedFromSensors do
       dataCollectedFromSensorsWithName.push([Sensor.find(sensor[0]).codename, sensor[1]])
     end
-    return dataCollectedFromSensorsWithName
+    dataCollectedFromSensorsWithName
   end
 
   def get_last_fifty
@@ -29,9 +29,12 @@ class DashboardsController < ApplicationController
   end
 
   def get_last_notification
-    @notifications = Notification.where(visualized: false)
-    respond_to do |format|
-      format.html { redirect_to root_path, alert: @notifications }
+    @notifications = Notification.where(visualized: false).uniq
+    noti = @notifications
+    render json: noti
+   #  respond_to do |format|
+   #    format.html { redirect_to root_path, alert: @notifications }
+  	# end
   end
 
   private
@@ -43,13 +46,12 @@ class DashboardsController < ApplicationController
      
       data.data_measure = dayMonthYear + ' | ' + values[1]
     }
-    return datas
+    datas
   end
 
   def formatToBrazilianTime(unformatedData)
     values = unformatedData.split("-")
     formatedData = values[2] + "-" + values[1] + "-" + values[0]
-    return formatedData
+    formatedData
   end
-
 end
