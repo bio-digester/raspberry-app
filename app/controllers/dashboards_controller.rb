@@ -37,6 +37,14 @@ class DashboardsController < ApplicationController
   	# end
   end
 
+  def read_notification()
+  	id = params[:id]
+  	notificacao = Notification.find(id)
+  	notificacao.visualized = true
+  	notificacao.save()
+
+  end
+
   private
   def formatTime(datas)
     datas.each { |data| 

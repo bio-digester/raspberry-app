@@ -547,6 +547,7 @@
 <script>
 console.log("entrou no script")
 var id = 0;
+var id_closed_notification = []
 setInterval(updateNotification, 1000);
 
 function preparaDiv(id, message){
@@ -568,6 +569,7 @@ function preparaBotao(id){
   botao.setAttribute("data-dismiss" , "alert");
   botao.setAttribute("aria-hidden" , "true");
   botao.innerHTML = "x";
+  botao.onclick = function() { id_closed_notification.push(id)};
   return botao;
 }
 
@@ -608,7 +610,7 @@ function criaDivFilhaFilha(){
   return divFilhaFilha;
 }
 
-function criaDivHeader(){
+function criaDivHeader(id){
   divHeader = document.createElement("div");
   divHeader.classList.add("modal-header");
 
@@ -644,7 +646,7 @@ function criaDivFooter(id){
   divFooter.classList.add("modal-footer");
 
   botaoFecharModal = document.createElement("button");
-  botaoFecharModal.innerHTML = "Close";
+  botaoFecharModal.innerHTML = "Marcar como lido";
   botaoFecharModal.onclick = function() { lerNotificacao(id) };
 
   divFooter.appendChild(botaoFecharModal);
@@ -654,10 +656,29 @@ function criaDivFooter(id){
 
 function lerNotificacao(id){
   console.log("ler notificação com o id: " + id);
+  $.get('../read_notification', { id: id },  function(retorno){
+    return
+  });
+}
+
+function removerIdsFechados(id_closed_notification, notificacoes){
+  var index = 0;
+  for(index = 0 ; index < notificacoes.length ; index++){
+    for(index1 = 0 ; index1 < id_closed_notification.length ; index1++){
+      if(notificacoes[index] != undefined){
+        if(notificacoes[index].id == id_closed_notification[index1]){
+          notificacoes.splice(index, 1);
+        }
+      }
+    }
+  }
+  return notificacoes;
 }
 
 function updateNotification(){
   $.get('../get_last_notification', function(notificacoes){
+    console.log(id_closed_notification);
+    notificacoes = removerIdsFechados(id_closed_notification, notificacoes);
 
     if(notificacoes){
       notificacaoDiv = document.getElementById('notificacaoDiv')
@@ -671,34 +692,36 @@ function updateNotification(){
       
 
       notificacaoDiv.style.display = "inline-block";
-      
+
       vezAtual = 0;
       qtdVezes = notificacoes.length;
-      do{
-        div = preparaDiv(id, notificacoes[vezAtual].message);
-        botao = preparaBotao(id);
-        a = preparaLink(id)
-        modalPai = criaModalPai(id);
-        divFilha = criaModalFilha();
-        divFilhaFilha = criaDivFilhaFilha();
+      if(notificacoes[vezAtual] != undefined){
+          do{
+            div = preparaDiv(id, notificacoes[vezAtual].message);
+            botao = preparaBotao(notificacoes[vezAtual].id);
+            a = preparaLink(id)
+            modalPai = criaModalPai(id);
+            divFilha = criaModalFilha();
+            divFilhaFilha = criaDivFilhaFilha();
 
-        divHeader = criaDivHeader();
-        divBody = criaDivBody(notificacoes[vezAtual].message);
-        divFooter = criaDivFooter(notificacoes[vezAtual].id);
+            divHeader = criaDivHeader();
+            divBody = criaDivBody(notificacoes[vezAtual].message);
+            divFooter = criaDivFooter(notificacoes[vezAtual].id);
 
-        divFilhaFilha.appendChild(divHeader);
-        divFilhaFilha.appendChild(divBody);        
-        divFilhaFilha.appendChild(divFooter);
-        divFilha.appendChild(divFilhaFilha);
-        modalPai.appendChild(divFilha);
-        div.appendChild(botao);
-        div.appendChild(a);
-        document.getElementById('notificacaoDiv').appendChild(div); 
-        document.getElementById('page-wrapper').appendChild(modalPai); 
+            divFilhaFilha.appendChild(divHeader);
+            divFilhaFilha.appendChild(divBody);        
+            divFilhaFilha.appendChild(divFooter);
+            divFilha.appendChild(divFilhaFilha);
+            modalPai.appendChild(divFilha);
+            div.appendChild(botao);
+            div.appendChild(a);
+            document.getElementById('notificacaoDiv').appendChild(div); 
+            document.getElementById('page-wrapper').appendChild(modalPai); 
 
-        vezAtual++;
-        id++;
-      }while(vezAtual < qtdVezes)
+            vezAtual++;
+            id++;
+          }while(vezAtual < qtdVezes)
+        }
       id = 0;
     }else{
       notificacaoDiv = document.getElementById('notificacaoDiv')
