@@ -290,8 +290,9 @@ $( document ).ready(function() {
 // Zoom Graph Highcharts script
 
 $.getJSON(
-  'http://localhost:3000/sensors/' + <%= @sensor.id %> + '/data_collects',
+  request.base_url + '/sensors/' + <%= @sensor.id %> + '/data_collects',
   function (data) {
+    alert("chamando")
     Highcharts.chart('container0', {
       chart: {
         zoomType: 'x'
