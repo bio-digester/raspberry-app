@@ -488,8 +488,10 @@ function updateNotification(){
 
     if(notificacoes){
       notificacaoDiv = document.getElementById('notificacaoDiv')
-      while (notificacaoDiv.firstChild) {
-        notificacaoDiv.removeChild(notificacaoDiv.firstChild);
+      if(notificacaoDiv != undefined){
+        while (notificacaoDiv.firstChild) {
+          notificacaoDiv.removeChild(notificacaoDiv.firstChild);
+        }
       }
 
       var h2 = document.getElementById('tituloH2')
