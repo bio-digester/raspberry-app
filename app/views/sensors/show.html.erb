@@ -148,16 +148,21 @@ $( document ).ready(function() {
       dataPoints: []
     }]
   });
-
-  addDataPoints(1000);
+  num = '<%= @data_collects.count %>'
+  valores = '<%= DataCollect.where(sensor_id: @sensor.id).to_json.html_safe %>'
+  valores = JSON.parse(valores);
+  addDataPoints(num, valores);
   chart1.render();
 
-  function addDataPoints(noOfDps) {
+  function addDataPoints(noOfDps, valores) {
     var xVal1 = chart1.options.data[0].dataPoints.length + 1, yVal1 = 0;
+    
     for(var i = 0; i < noOfDps; i++) {
-      yVal1 =  Math.random() * (1.5 - 0.01) + 0.01;
-      chart1.options.data[0].dataPoints.push({x: xVal1,y: yVal1});
-      xVal1++;
+        if(valores[i].value != null){
+          yVal1 =  eval(valores[i].value);
+          chart1.options.data[0].dataPoints.push({x: xVal1,y: yVal1});
+          xVal1++;
+        } 
     }
   }
 });
