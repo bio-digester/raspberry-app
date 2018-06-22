@@ -260,7 +260,6 @@ $( document ).ready(function() {
   var dataLength = 20; // number of dataPoints visible at any point
 
   var updateChart = function (count) {
-    console.log("chamando o updatechart");
     count = count || 1;
 
     $.get('../get_data_collect_last/<%= @sensor.id %>', function(valor){
@@ -290,9 +289,8 @@ $( document ).ready(function() {
 // Zoom Graph Highcharts script
 
 $.getJSON(
-  request.base_url + '/sensors/' + <%= @sensor.id %> + '/data_collects',
+  '/sensors/' + <%= @sensor.id %> + '/data_collects',
   function (data) {
-    alert("chamando")
     Highcharts.chart('container0', {
       chart: {
         zoomType: 'x'
