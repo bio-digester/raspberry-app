@@ -23,8 +23,8 @@ Rails.application.routes.draw do
 
   get 'get_last_fifty/:id' => 'dashboards#get_last_fifty' , as: 'get_last_fifty'
   get 'get_data_collect_last/:id' => 'sensors#get_last_value'
-  get 'get_last_notification/' => 'dashboards#get_last_notification', as: 'get_last_notification'
-  get 'read_notification' => 'dashboards#read_notification'
+  get 'get_last_notification/' => 'notifications#get_last_notification', as: 'get_last_notification'
+  get 'read_notification/' => 'notifications#read_notification'
 
   get '/sensors' => 'sensors#index', as: 'sensors'
   get '/sensors/:id' => 'sensors#show' , as: 'sensor'
@@ -35,6 +35,5 @@ Rails.application.routes.draw do
   get '/sync/send_data' => 'sync#send_data', as: 'send_data'
   get '/sync/retrieve_data' => 'sync#retrieve_data', as: 'retrieve_data'
   get '/sync/' => 'sync#synchronize_data', as: 'synchronize_data'
-  patch '/notifications/:id/to_view' => 'notifications#to_view', as: 'to_view'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

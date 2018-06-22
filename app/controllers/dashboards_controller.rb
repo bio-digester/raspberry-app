@@ -24,34 +24,17 @@ class DashboardsController < ApplicationController
     id = params[:id]
     datas = DataCollect.where(sensor_id: id).last(50)
     datas = formatTime(datas)
-    
-    render json: datas.pluck(:data_measure, :value)  
-  end
 
-  def get_last_notification
-    @notifications = Notification.where(visualized: false).uniq
-    noti = @notifications
-    render json: noti
-   #  respond_to do |format|
-   #    format.html { redirect_to root_path, alert: @notifications }
-  	# end
-  end
-
-  def read_notification()
-  	id = params[:id]
-  	notificacao = Notification.find(id)
-  	notificacao.visualized = true
-  	notificacao.save()
-
+    render json: datas.pluck(:data_measure, :value)
   end
 
   private
   def formatTime(datas)
-    datas.each { |data| 
+    datas.each { |data|
       y = data.data_measure.to_s
       values = y.split(" ")
       dayMonthYear = formatToBrazilianTime(values[0])
-     
+
       data.data_measure = dayMonthYear + ' | ' + values[1]
     }
     datas

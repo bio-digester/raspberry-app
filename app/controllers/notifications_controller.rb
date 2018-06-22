@@ -1,15 +1,16 @@
 class NotificationsController < ApplicationController
-before_action :set_notification
-  def to_view
-    @notification.update_attribute(:visualized, true)
-    if @notification.message == "[ALERT] O biogás está pronto para ser retirado" || @notification.message == "[DANGER] Retire urgentemente o biogás"
-      system "rake message:send_socket_message"
-    end
+  def get_last_notification
+    @notifications = Notification.where(visualized: false).uniq
+    render json: @notifications
   end
 
-private
-  def set_notification
-    @notification = Notification.find(params[:id])
+  def read_notification
+    notificacao = Notification.find(params[:id])
+    notificacao.visualized = true
+    if notificacao.message == "[ALERT] O biogás está pronto para ser retirado" || notificacao.message == "[DANGER] Retire urgentemente o biogás"
+      system "rake message:send_socket_message"
+    end
+    notificacao.save()
   end
 
 end
