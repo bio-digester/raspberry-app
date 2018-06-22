@@ -458,7 +458,11 @@ function criaDivFooter(id, message){
   botaoFecharModal.innerHTML = "Marcar como lido";
   botaoFecharModal.onclick = function() { lerNotificacao(id) };
 
-  if(message.localeCompare("[ALERT] O biogás está pronto para ser retirado") == 0 ){
+  message1 = "[WARNING] O nível de alimentação está no limite, retire o biofertilizante";
+  message2 = "[WARNING] Retire o Biogás";
+
+  if(message.localeCompare(message1) == 0 || 
+     message.localeCompare(message2) == 0 ){
     botaoFecharModal.innerHTML = "Gás removido";
     botaoAux = document.createElement("button");
     botaoAux.innerHTML = "Remover Gás";
