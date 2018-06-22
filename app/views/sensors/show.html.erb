@@ -13,9 +13,6 @@
             dessa faixa diminui o rendimento da produção e as bactérias podem morrer.
           </p>
         </div>
-        <div class="panel-footer">
-          Panel Footer
-        </div>
       </div>
       <% elsif @sensor.name == "LEVEL" %>
       <div class="panel panel-green">
@@ -29,9 +26,6 @@
             mínimo e no sentido oposto sabe quando o biodigestor atingiu o nível máximo.
           </p>
         </div>
-        <div class="panel-footer">
-          Panel Footer
-        </div>
       </div>
       <% elsif @sensor.name == "PRESSURE" %>
       <div class="panel panel-yellow">
@@ -39,10 +33,7 @@
           Monitoramento de Pressão
         </div>
         <div class="panel-body">
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
-        </div>
-        <div class="panel-footer">
-          Panel Footer
+          <p>A pressão do gás no interior da câmara de biodigestão é um parâmetro importante para manter a operação segura do equipamento.</p>
         </div>
       </div>
       <% elsif @sensor.name == "PH" %>
@@ -57,9 +48,6 @@
             a faixa fica entre 6,5 e 7,5, para o melhor desempenho dos microrganismos.
           </p>
         </div>
-        <div class="panel-footer">
-          Panel Footer
-        </div>
       </div>
       <% elsif @sensor.name == "CONCENTRATION" %>
       <div class="panel panel-default">
@@ -67,11 +55,8 @@
           Monitoramento da Concentração
         </div>
         <div class="panel-body">
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          <p>A concentração de gás é um dos parâmetros analisados pelo sistema, pois é a partir desse parâmetro que o sistema saberá a eficiência da produção e a qualidade do Biogás que foi produzido. Quanto maior a concentração de metano maior o poder calorífico do biogás produzido pelo biodigestor.
           </p>
-        </div>
-        <div class="panel-footer">
-          Panel Footer
         </div>
       </div>
       <%end%>
@@ -84,21 +69,6 @@
           <i class="fa fa-bar-chart-o fa-fw"></i> <%= @sensor.codename %> Vs Tempo
           <div class="pull-right">
             <div class="btn-group">
-              <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
-                Actions
-                <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu pull-right" role="menu">
-                <li><a href="#">Action</a>
-                </li>
-                <li><a href="#">Another action</a>
-                </li>
-                <li><a href="#">Something else here</a>
-                </li>
-                <li class="divider"></li>
-                <li><a href="#">Separated link</a>
-                </li>
-              </ul>
             </div>
           </div>
         </div>
@@ -114,24 +84,9 @@
       <!-- Zoom Graph CanvasJS-->
       <div class="panel panel-default">
         <div class="panel-heading">
-          <i class="fa fa-bar-chart-o fa-fw"></i> <%= @sensor.codename %> Vs Tempo / Zoom Graph
+          <i class="fa fa-bar-chart-o fa-fw"></i> <%= @sensor.codename %> Vs Tempo / Gráfico de Zoom
           <div class="pull-right">
             <div class="btn-group">
-              <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
-                Actions
-                <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu pull-right" role="menu">
-                <li><a href="#">Action</a>
-                </li>
-                <li><a href="#">Another action</a>
-                </li>
-                <li><a href="#">Something else here</a>
-                </li>
-                <li class="divider"></li>
-                <li><a href="#">Separated link</a>
-                </li>
-              </ul>
             </div>
           </div>
         </div>
@@ -144,24 +99,9 @@
       <!-- Real Time Graph CanvasJS-->
       <div class="panel panel-default">
         <div class="panel-heading">
-          <i class="fa fa-bar-chart-o fa-fw"></i> <%= @sensor.codename %> Vs Tempo / Real Time
+          <i class="fa fa-bar-chart-o fa-fw"></i> <%= @sensor.codename %> Vs Tempo / Tempo Real
           <div class="pull-right">
             <div class="btn-group">
-              <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
-                Actions
-                <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu pull-right" role="menu">
-                <li><a href="#">Action</a>
-                </li>
-                <li><a href="#">Another action</a>
-                </li>
-                <li><a href="#">Something else here</a>
-                </li>
-                <li class="divider"></li>
-                <li><a href="#">Separated link</a>
-                </li>
-              </ul>
             </div>
           </div>
         </div>
@@ -173,24 +113,9 @@
       <!-- Zoom Graph Highcharts -->
       <div class="panel panel-default">
         <div class="panel-heading">
-          <i class="fa fa-bar-chart-o fa-fw"></i> <%= @sensor.codename %> Vs Tempo / Zoom Graph
+          <i class="fa fa-bar-chart-o fa-fw"></i> <%= @sensor.codename %> Vs Tempo / Gráfico de Zoom
           <div class="pull-right">
             <div class="btn-group">
-              <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
-                Actions
-                <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu pull-right" role="menu">
-                <li><a href="#">Action</a>
-                </li>
-                <li><a href="#">Another action</a>
-                </li>
-                <li><a href="#">Something else here</a>
-                </li>
-                <li class="divider"></li>
-                <li><a href="#">Separated link</a>
-                </li>
-              </ul>
             </div>
           </div>
         </div>

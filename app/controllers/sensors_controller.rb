@@ -52,9 +52,9 @@ class SensorsController < ApplicationController
     when 4
       @data_collects = DataCollect.where(sensor_id: Sensor.find_by(name: "LEVEL").id).last(50)
     when 5
-      @data_collects = DataCollect.where(sensor_id: Sensor.find_by(name: "ENTRY").id).last(50)
-    when 6
       @data_collects = DataCollect.where(sensor_id: Sensor.find_by(name: "PH").id).last(50)
+    when 6
+      @data_collects = DataCollect.where(sensor_id: Sensor.find_by(name: "ENTRY").id).last(50)
     else
       @data_collects = DataCollect.all
     end
