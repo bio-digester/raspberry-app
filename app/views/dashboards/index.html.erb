@@ -453,8 +453,7 @@ function criaDivFooter(id, message){
   divFooter.classList.add("modal-footer");
 
   botaoFecharModal = document.createElement("button");
-  botaoFecharModal.setAttribute("data-toggle" , "modal");
-  botaoFecharModal.setAttribute("data-target" , "#myModal" + id);
+  botaoFecharModal.setAttribute("data-dismiss" , "modal");
 
   botaoFecharModal.innerHTML = "Marcar como lido";
   botaoFecharModal.onclick = function() { lerNotificacao(id) };
