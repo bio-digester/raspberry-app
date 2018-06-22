@@ -14,7 +14,7 @@
 
 
   <h2 id='tituloH2' style="display: none;"></h2>
-  <div id='notificacaoDiv' style="display: none;"></div>
+  <div id='notificacaoDiv' style="width:100%; display: none;"></div>
 
   <!-- Modal -->
   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -358,6 +358,7 @@ setInterval(updateNotification, 1000);
 
 function preparaDiv(id, message){
   div = document.createElement("div");
+  
   div.id = id
   div.classList.add("alert");
   div.classList.add("alert-danger");
