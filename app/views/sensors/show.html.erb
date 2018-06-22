@@ -33,7 +33,7 @@
           Monitoramento de Pressão
         </div>
         <div class="panel-body">
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
+          <p>A pressão do gás no interior da câmara de biodigestão é um parâmetro importante para manter a operação segura do equipamento.</p>
         </div>
       </div>
       <% elsif @sensor.name == "PH" %>
@@ -55,7 +55,7 @@
           Monitoramento da Concentração
         </div>
         <div class="panel-body">
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          <p>A concentração de gás é um dos parâmetros analisados pelo sistema, pois é a partir desse parâmetro que o sistema saberá a eficiência da produção e a qualidade do Biogás que foi produzido. Quanto maior a concentração de metano maior o poder calorífico do biogás produzido pelo biodigestor.
           </p>
         </div>
       </div>
@@ -84,7 +84,7 @@
       <!-- Zoom Graph CanvasJS-->
       <div class="panel panel-default">
         <div class="panel-heading">
-          <i class="fa fa-bar-chart-o fa-fw"></i> <%= @sensor.codename %> Vs Tempo / Zoom Graph
+          <i class="fa fa-bar-chart-o fa-fw"></i> <%= @sensor.codename %> Vs Tempo / Gráfico de Zoom
           <div class="pull-right">
             <div class="btn-group">
             </div>
@@ -99,7 +99,7 @@
       <!-- Real Time Graph CanvasJS-->
       <div class="panel panel-default">
         <div class="panel-heading">
-          <i class="fa fa-bar-chart-o fa-fw"></i> <%= @sensor.codename %> Vs Tempo / Real Time
+          <i class="fa fa-bar-chart-o fa-fw"></i> <%= @sensor.codename %> Vs Tempo / Tempo Real
           <div class="pull-right">
             <div class="btn-group">
             </div>
@@ -113,7 +113,7 @@
       <!-- Zoom Graph Highcharts -->
       <div class="panel panel-default">
         <div class="panel-heading">
-          <i class="fa fa-bar-chart-o fa-fw"></i> <%= @sensor.codename %> Vs Tempo / Zoom Graph
+          <i class="fa fa-bar-chart-o fa-fw"></i> <%= @sensor.codename %> Vs Tempo / Gráfico de Zoom
           <div class="pull-right">
             <div class="btn-group">
             </div>
