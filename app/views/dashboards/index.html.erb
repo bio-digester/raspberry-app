@@ -12,13 +12,9 @@
   </div>
   <% end %>
 
-  <% if flash[:alert] %>
-  <h2>Você possui <%= flash[:alert].size %> notificações</h2>
-  <% flash[:alert].each do |notification| %>
-  <div class="alert alert-danger alert-dismissable">
-    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-    <%= notification['message'] %> <a data-toggle="modal" data-target="#myModal"> mais informações </a>
-  </div>
+
+  <h2 id='tituloH2' style="display: none;"></h2>
+  <div id='notificacaoDiv' style="display: none;"></div>
 
   <!-- Modal -->
   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -29,10 +25,10 @@
           <h4 class="modal-title" id="myModalLabel">Detalhes da Notificação</h4>
         </div>
         <div class="modal-body">
-          <%= notification['message'] %>
+          
         </div>
         <div class="modal-footer">
-          <%= button_to "Close", to_view_path(notification['id']), :method => "patch" %>
+          
         </div>
       </div>
       <!-- /.modal-content -->
@@ -40,8 +36,7 @@
     <!-- /.modal-dialog -->
   </div>
   <!-- /.modal -->
-  <% end %>
-  <% end %>
+  
   <!-- /.row -->
   <div class="row">
 
@@ -106,7 +101,7 @@
         <div class="panel-heading">
           <div class="row">
             <div class="col-xs-2">
-              <i class="fa fa-tachometer	 fa-2x"></i>
+              <i class="fa fa-tachometer   fa-2x"></i>
             </div>
             <div class="col-xs-10 text-right">
               <% if @pressure.last != nil %>
@@ -551,10 +546,168 @@
 <!-- /#wrapper -->
 <script>
 console.log("entrou no script")
-setInterval(updateNotification, 5000);
+var id = 0;
+setInterval(updateNotification, 1000);
+
+function preparaDiv(id, message){
+  div = document.createElement("div");
+  div.id = id
+  div.classList.add("alert");
+  div.classList.add("alert-danger");
+  div.classList.add("alert-dismissable");
+  div.innerHTML = message + ". ";
+
+  return div;
+}
+
+function preparaBotao(id){
+  botao = document.createElement("button");
+  botao.id = id
+  botao.classList.add("close");
+  botao.setAttribute("type" , "button");
+  botao.setAttribute("data-dismiss" , "alert");
+  botao.setAttribute("aria-hidden" , "true");
+  botao.innerHTML = "x";
+  return botao;
+}
+
+function preparaLink(id){
+  a = document.createElement("a")
+  a.id = id
+  a.innerHTML = "mais informações"
+  a.setAttribute("data-toggle" , "modal");
+  a.setAttribute("data-target" , "#myModal" + id);
+
+  return a;
+}
+
+function criaModalPai(id){
+  modalPai = document.createElement("div");
+  modalPai.id = "myModal" + id;
+  modalPai.setAttribute("tabindex" , "-1");
+  modalPai.setAttribute("role" , "dialog");
+  modalPai.setAttribute("aria-labelledby" , "myModalLabel");
+  modalPai.setAttribute("aria-hidden" , "true");
+  modalPai.classList.add("modal");
+  modalPai.classList.add("fade");
+
+  return modalPai;
+}
+
+function criaModalFilha(){
+  divFilha = document.createElement("div");
+  divFilha.classList.add("modal-dialog");
+
+  return divFilha;
+}
+
+function criaDivFilhaFilha(){
+  divFilhaFilha = document.createElement("div");
+  divFilhaFilha.classList.add("modal-content");
+
+  return divFilhaFilha;
+}
+
+function criaDivHeader(){
+  divHeader = document.createElement("div");
+  divHeader.classList.add("modal-header");
+
+  h4 = document.createElement("H4");
+  h4.classList.add("modal-title");
+  h4.innerHTML = "Detalhes da Notificação";
+
+
+  botaoModal = document.createElement("button");
+  botaoModal.classList.add("close");
+  botaoModal.setAttribute("type" , "button");
+  botaoModal.setAttribute("data-dismiss" , "modal");
+  botaoModal.setAttribute("aria-hidden" , "true");
+  botaoModal.innerHTML = "x";
+
+  divHeader.appendChild(botaoModal);
+  divHeader.appendChild(h4);
+
+  // <h4 id="myModalLabel"></h4>
+  return divHeader;
+}
+
+function criaDivBody(message){
+  divBody = document.createElement("div");
+  divBody.classList.add("modal-body");
+  divBody.innerHTML = message;
+
+  return divBody;
+}
+
+function criaDivFooter(id){
+  divFooter = document.createElement("div");
+  divFooter.classList.add("modal-footer");
+
+  botaoFecharModal = document.createElement("button");
+  botaoFecharModal.innerHTML = "Close";
+  botaoFecharModal.onclick = function() { lerNotificacao(id) };
+
+  divFooter.appendChild(botaoFecharModal);
+
+  return divFooter;
+}
+
+function lerNotificacao(id){
+  console.log("ler notificação com o id: " + id);
+}
 
 function updateNotification(){
-  document.location.href = "http://localhost:3000/get_last_notification";
+  $.get('../get_last_notification', function(notificacoes){
+
+    if(notificacoes){
+      notificacaoDiv = document.getElementById('notificacaoDiv')
+      while (notificacaoDiv.firstChild) {
+        notificacaoDiv.removeChild(notificacaoDiv.firstChild);
+      }
+
+      var h2 = document.getElementById('tituloH2')
+      h2.style.display = "block";      
+      h2.innerHTML = "Você possui " + notificacoes.length +  " notificações"
+      
+
+      notificacaoDiv.style.display = "inline-block";
+      
+      vezAtual = 0;
+      qtdVezes = notificacoes.length;
+      do{
+        div = preparaDiv(id, notificacoes[vezAtual].message);
+        botao = preparaBotao(id);
+        a = preparaLink(id)
+        modalPai = criaModalPai(id);
+        divFilha = criaModalFilha();
+        divFilhaFilha = criaDivFilhaFilha();
+
+        divHeader = criaDivHeader();
+        divBody = criaDivBody(notificacoes[vezAtual].message);
+        divFooter = criaDivFooter(notificacoes[vezAtual].id);
+
+        divFilhaFilha.appendChild(divHeader);
+        divFilhaFilha.appendChild(divBody);        
+        divFilhaFilha.appendChild(divFooter);
+        divFilha.appendChild(divFilhaFilha);
+        modalPai.appendChild(divFilha);
+        div.appendChild(botao);
+        div.appendChild(a);
+        document.getElementById('notificacaoDiv').appendChild(div); 
+        document.getElementById('page-wrapper').appendChild(modalPai); 
+
+        vezAtual++;
+        id++;
+      }while(vezAtual < qtdVezes)
+      id = 0;
+    }else{
+      notificacaoDiv = document.getElementById('notificacaoDiv')
+      notificacaoDiv.style.display = "none";
+      document.getElementById('tituloH2').style.display = "none";
+    }
+    
+  });
+  // document.location.href = "http://localhost:3000/get_last_notification";
 }
 </script>
 
