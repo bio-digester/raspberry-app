@@ -11,7 +11,7 @@ namespace :sync do
       "gas_production": DataCollect.where(sensor_id: Sensor.find_by(name: "CONCENTRATION").id).last.value
     }]
     begin
-      response = RestClient.post("http://35.231.177.140/api/samples/", payload.to_json, content_type: :json)
+      response = RestClient.post("https://datadigester.centeias.net/api/samples/", payload.to_json, content_type: :json)
       puts response
     rescue  RestClient::ExceptionWithResponse => e
       puts e.response
@@ -22,7 +22,7 @@ namespace :sync do
   task :retrieve_data => :environment do
     puts "====================================================Retrieve data===================================================="
     begin
-      response = RestClient.get("http://35.231.177.140/api/optimize/")
+      response = RestClient.get("https://datadigester.centeias.net/api/optimize/")
       response = JSON.parse(response)
       response.each do |r|
         puts "Cadastrando Optimization"
@@ -47,10 +47,10 @@ namespace :sync do
     }]
     begin
       puts "====================================================Send data===================================================="
-      response = RestClient.post("http://35.231.177.140/api/samples/", payload.to_json, content_type: :json)
+      response = RestClient.post("https://datadigester.centeias.net/api/samples/", payload.to_json, content_type: :json)
       puts response
       puts "====================================================Retrieve data===================================================="
-      response = RestClient.get("http://35.231.177.140/api/optimize/")
+      response = RestClient.get("https://datadigester.centeias.net/api/optimize/")
       response = JSON.parse(response)
       response.each do |r|
         puts "Cadastrando Optimization"
