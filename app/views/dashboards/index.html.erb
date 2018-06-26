@@ -68,7 +68,7 @@
       </div>
     </div>
 
-    <!-- Nível -->
+    <!-- volume -->
     <div class="col-lg-3 col-md-6">
       <div class="panel panel-green">
         <div class="panel-heading">
@@ -83,7 +83,7 @@
               <% else %>
               <div class="huge"> 0 dados</div>
               <% end %>
-              <div>Nível</div>
+              <div>Volume</div>
             </div>
           </div>
         </div>
@@ -133,7 +133,7 @@
             </div>
             <div class="col-xs-9 text-right">
               <% if @ph.last != nil %>
-              <div class="huge"><%= '%.5f' % @ph.last.value%></div>
+              <div class="huge"><%= '%.2f' % @ph.last.value%></div>
               <%=@ph.last.data_measure.strftime("%d/%m/%Y - %I:%M %p")%>
               <% else%>
               <div class="huge"> 0 dados</div>
@@ -196,7 +196,7 @@
         </div>
         <!-- /.panel-heading -->
         <div class="panel-body">
-          <div id="morris-area-chart"><%= line_chart get_last_fifty_path(:id => @sensors.find_by(name: "TEMPDS")), adapter: "highcharts", refresh: 5%></div>
+          <div id="morris-area-chart"><%= line_chart get_last_fifty_path(:id => @sensors.find_by(name: "TEMPDS")), adapter: "highcharts", refresh: 5, suffix: " ºC", xtitle: "Tempo (dd/mm, hh/mm/ss)", ytitle: "Temperatura (ºC)"%></div>
         </div>
         <!-- /.panel-body -->
       </div>
@@ -204,11 +204,11 @@
 
 
 
-      <!-- Gráfico Nível -->
+      <!-- Gráfico Volume -->
       <% if @level.last != nil %>
       <div class="panel panel-default">
         <div class="panel-heading">
-          <i class="fa fa-bar-chart-o fa-fw"></i> Nível Vs Tempo
+          <i class="fa fa-bar-chart-o fa-fw"></i> Volume Vs Tempo
           <div class="pull-right">
             <div class="btn-group">
 
@@ -217,7 +217,7 @@
         </div>
         <!-- /.panel-heading -->
         <div class="panel-body">
-          <div id="morris-area-chart"><%= line_chart get_last_fifty_path(:id => @sensors.find_by(name: "LEVEL")), adapter: "highcharts", refresh: 5%></div>
+          <div id="morris-area-chart"><%= line_chart get_last_fifty_path(:id => @sensors.find_by(name: "LEVEL")), adapter: "highcharts", refresh: 5, suffix: " cm³", xtitle: "Tempo (dd/mm, hh/mm/ss)", ytitle: "Volume (cm³)"%></div>
         </div>
         <!-- /.panel-body -->
       </div>
@@ -235,7 +235,7 @@
         </div>
         <!-- /.panel-heading -->
         <div class="panel-body">
-          <div id="morris-area-chart"><%= line_chart get_last_fifty_path(:id => @sensors.find_by(name: "PRESSURE")), adapter: "highcharts", refresh: 5%></div>
+          <div id="morris-area-chart"><%= line_chart get_last_fifty_path(:id => @sensors.find_by(name: "PRESSURE")), adapter: "highcharts", refresh: 5, suffix: " kPa", xtitle: "Tempo (dd/mm, hh/mm/ss)", ytitle: "Pressão (kPa)"%></div>
         </div>
         <!-- /.panel-body -->
       </div>
@@ -254,7 +254,7 @@
         </div>
         <!-- /.panel-heading -->
         <div class="panel-body">
-          <div id="morris-area-chart"><%= line_chart get_last_fifty_path(:id => @sensors.find_by(name: "PH")), adapter: "highcharts", refresh: 5%></div>
+          <div id="morris-area-chart"><%= line_chart get_last_fifty_path(:id => @sensors.find_by(name: "PH")), adapter: "highcharts", refresh: 5, xtitle: "Tempo (dd/mm, hh/mm/ss)", ytitle: "PH"%></div>
         </div>
         <!-- /.panel-body -->
       </div>
@@ -273,7 +273,7 @@
         </div>
         <!-- /.panel-heading -->
         <div class="panel-body">
-          <div id="morris-area-chart"><%= line_chart get_last_fifty_path(:id => @sensors.find_by(name: "CONCENTRATION")), adapter: "highcharts", refresh: 5%></div>
+          <div id="morris-area-chart"><%= line_chart get_last_fifty_path(:id => @sensors.find_by(name: "CONCENTRATION")), adapter: "highcharts", refresh: 5,  suffix: " ppm", xtitle: "Tempo (dd/mm, hh/mm/ss)", ytitle: "Concentração (ppm)"%></div>
         </div>
         <!-- /.panel-body -->
       </div>
@@ -282,7 +282,7 @@
       <!-- /.panel -->
       <div class="panel panel-default">
         <div class="panel-heading">
-          <i class="fa fa-bar-chart-o fa-fw"></i> Volume de Dados Coletados / Dia
+          <i class="fa fa-bar-chart-o fa-fw"></i> Volume de Dados Coletados Por Dia
           <div class="pull-right">
             <div class="btn-group">
 
@@ -304,11 +304,10 @@
       <!-- /.panel -->
       <div class="panel panel-default">
         <div class="panel-heading">
-          <i class="fa fa-bar-chart-o fa-fw"></i> Volume de Dados VS Sensor
+          <i class="fa fa-bar-chart-o fa-fw"></i> Volume de Dados De Cada Sensor
         </div>
         <div class="panel-body">
-          <div id="morris-donut-chart"><%= pie_chart @dataCollectedFromSensorsWithName, donut: true %></div>
-          <a href="#" class="btn btn-default btn-block">Visualizar Detalhes</a>
+          <div id="morris-donut-chart"><%= column_chart @dataCollectedFromSensorsWithName %></div>
         </div>
         <!-- /.panel-body -->
       </div>
@@ -458,10 +457,10 @@ function criaDivFooter(id, message){
   botaoFecharModal.innerHTML = "Marcar como lido";
   botaoFecharModal.onclick = function() { lerNotificacao(id) };
 
-  message1 = "[WARNING] O nível de alimentação está no limite, retire o biofertilizante";
+  message1 = "[WARNING] O volume de alimentação está no limite, retire o biofertilizante";
   message2 = "[WARNING] Retire o Biogás";
 
-  if(message.localeCompare(message1) == 0 || 
+  if(message.localeCompare(message1) == 0 ||
      message.localeCompare(message2) == 0 ){
     botaoFecharModal.innerHTML = "Gás removido";
     botaoAux = document.createElement("button");

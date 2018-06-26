@@ -7,7 +7,7 @@ class NotificationsController < ApplicationController
   def read_notification
     notificacao = Notification.find(params[:id])
     notificacao.visualized = true
-    if notificacao.message == "[WARNING] O nível de alimentação está no limite, retire o biofertilizante" || notificacao.message == "[WARNING] Retire o Biogás"
+    if notificacao.message == "[WARNING] O Volume de alimentação está no limite, retire o biofertilizante" || notificacao.message == "[WARNING] Retire o Biogás"
       system "rake message:send_socket_message"
     end
     notificacao.save()
