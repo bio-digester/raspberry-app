@@ -196,7 +196,7 @@
         </div>
         <!-- /.panel-heading -->
         <div class="panel-body">
-          <div id="morris-area-chart"><%= line_chart get_last_fifty_path(:id => @sensors.find_by(name: "TEMPDS")), adapter: "highcharts", refresh: 5, suffix: " ºC", xtitle: "Tempo (dd/mm, hh/mm/ss)", ytitle: "Temperatura (ºC)"%></div>
+          <div id="morris-area-chart"><%= line_chart get_last_fifty_path(:id => @sensors.find_by(name: "TEMPDS")), adapter: "highcharts", refresh: 5, suffix: " ºC", xtitle: "Tempo (hh:mm)", ytitle: "Temperatura (ºC)"%></div>
         </div>
         <!-- /.panel-body -->
       </div>
@@ -217,7 +217,7 @@
         </div>
         <!-- /.panel-heading -->
         <div class="panel-body">
-          <div id="morris-area-chart"><%= line_chart get_last_fifty_path(:id => @sensors.find_by(name: "LEVEL")), adapter: "highcharts", refresh: 5, suffix: " cm³", xtitle: "Tempo (dd/mm, hh/mm/ss)", ytitle: "Volume (cm³)"%></div>
+          <div id="morris-area-chart"><%= line_chart get_last_fifty_path(:id => @sensors.find_by(name: "LEVEL")), adapter: "highcharts", refresh: 5, suffix: " cm³", xtitle: "Tempo (hh:mm:ss)", ytitle: "Volume (cm³)"%></div>
         </div>
         <!-- /.panel-body -->
       </div>
@@ -235,7 +235,7 @@
         </div>
         <!-- /.panel-heading -->
         <div class="panel-body">
-          <div id="morris-area-chart"><%= line_chart get_last_fifty_path(:id => @sensors.find_by(name: "PRESSURE")), adapter: "highcharts", refresh: 5, suffix: " kPa", xtitle: "Tempo (dd/mm, hh/mm/ss)", ytitle: "Pressão (kPa)"%></div>
+          <div id="morris-area-chart"><%= line_chart get_last_fifty_path(:id => @sensors.find_by(name: "PRESSURE")), adapter: "highcharts", refresh: 5, suffix: " kPa", xtitle: "Tempo (hh:mm:ss)", ytitle: "Pressão (kPa)"%></div>
         </div>
         <!-- /.panel-body -->
       </div>
@@ -254,7 +254,7 @@
         </div>
         <!-- /.panel-heading -->
         <div class="panel-body">
-          <div id="morris-area-chart"><%= line_chart get_last_fifty_path(:id => @sensors.find_by(name: "PH")), adapter: "highcharts", refresh: 5, xtitle: "Tempo (dd/mm, hh/mm/ss)", ytitle: "PH"%></div>
+          <div id="morris-area-chart"><%= line_chart get_last_fifty_path(:id => @sensors.find_by(name: "PH")), adapter: "highcharts", refresh: 5, xtitle: "Tempo (hh:mm:ss)", ytitle: "PH"%></div>
         </div>
         <!-- /.panel-body -->
       </div>
@@ -273,7 +273,7 @@
         </div>
         <!-- /.panel-heading -->
         <div class="panel-body">
-          <div id="morris-area-chart"><%= line_chart get_last_fifty_path(:id => @sensors.find_by(name: "CONCENTRATION")), adapter: "highcharts", refresh: 5,  suffix: " ppm", xtitle: "Tempo (dd/mm, hh/mm/ss)", ytitle: "Concentração (ppm)"%></div>
+          <div id="morris-area-chart"><%= line_chart get_last_fifty_path(:id => @sensors.find_by(name: "CONCENTRATION")), adapter: "highcharts", refresh: 5,  suffix: " ppm", xtitle: "Tempo (hh:mm:ss)", ytitle: "Concentração (ppm)"%></div>
         </div>
         <!-- /.panel-body -->
       </div>

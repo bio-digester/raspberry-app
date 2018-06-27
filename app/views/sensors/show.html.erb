@@ -175,7 +175,7 @@ $( document ).ready(function() {
   var dps = []; // dataPoints
   var chart = new CanvasJS.Chart("real_time", {
     axisX: {
-      title:"Tempo",
+      title:"Tempo (hh:mm:ss)",
     },
     axisY: {
       title: '<%= @yAxis%>',
@@ -265,14 +265,17 @@ $.getJSON(
       },
       subtitle: {
         text: document.ontouchstart === undefined ?
-        'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in'
+        'Clique e arraste na área do ponto para dar zoom' : 'Pinch the chart to zoom in'
       },
       xAxis: {
-        type: 'datetime'
+        type: 'datetime',
+        title: {
+          text: 'Tempo (dia - mês | hh:mm:ss)'
+        }
       },
       yAxis: {
         title: {
-          text: 'Temperatura'
+          text: '<%= @yAxis%>'
         }
       },
       legend: {
@@ -307,7 +310,7 @@ $.getJSON(
 
       series: [{
         type: 'area',
-        name: 'USD to EUR',
+        name: 'Valor',
         data: data
       }]
     });
