@@ -174,24 +174,33 @@ $( document ).ready(function() {
 
   var dps = []; // dataPoints
   var chart = new CanvasJS.Chart("real_time", {
+    axisX: {
+      title:"Tempo",
+    },
     axisY: {
+      title: '<%= @yAxis%>',
       includeZero: false
     },
     data: [{
       type: "line",
+      // dataPoints: dps
       dataPoints: dps
     }]
   });
 
-  var xVal = <%= @data_collects.count%>;
-  var yVal = 100;
+  // var valorX = <%= @data_collects.count%>;
+  // todayDate = formataDataDeHoje();
+  // todayHour = formataHoraDeAgora();
+  
+  // var date = new Date("15-12-2015");
+  // var date = new Date(year, month, day, hours, minutes, seconds,);
 
-  var updateInterval = 1000;
-  var dataLength = 20; // number of dataPoints visible at any point
+  var updateInterval = 2000;
+  var dataLength = 10; // number of dataPoints visible at any point
 
   var updateChart = function (count) {
+    xVal = new Date()
     count = count || 1;
-
     $.get('../get_data_collect_last/<%= @sensor.id %>', function(valor){
       yVal = valor
       dps.push({
@@ -213,6 +222,32 @@ $( document ).ready(function() {
   setInterval(function(){updateChart()}, updateInterval);
 
 });
+</script>
+<script>
+  function formataDataDeHoje(){
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth()+1; //January is 0!
+
+    var yyyy = today.getFullYear();
+    if(dd<10){
+        dd='0'+dd;
+    } 
+    if(mm<10){
+        mm='0'+mm;
+    } 
+    var today = dd+'/'+mm+'/'+yyyy;
+    return today;
+  }
+
+  function formataHoraDeAgora(){
+    var d = new Date(); // for now
+    var hora = d.getHours(); // => 9
+    var minuto = d.getMinutes(); // =>  30
+    var segundo = d.getSeconds(); // => 51
+    tempoReal = hora + ":" + minuto + ":" + segundo
+    return tempoReal;
+  }
 </script>
 
 <script type="text/javascript">

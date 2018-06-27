@@ -138,7 +138,7 @@
               <% else%>
               <div class="huge"> 0 dados</div>
               <% end %>
-              <div>PH</div>
+              <div>pH</div>
             </div>
           </div>
         </div>
@@ -506,18 +506,18 @@ function updateNotification(){
 
     if(notificacoes){
       notificacaoDiv = document.getElementById('notificacaoDiv')
-      if(notificacaoDiv != undefined){
+      if(notificacaoDiv != undefined && notificacaoDiv != null){
+        notificacaoDiv.style.display = "inline-block";
         while (notificacaoDiv.firstChild) {
           notificacaoDiv.removeChild(notificacaoDiv.firstChild);
         }
       }
 
       var h2 = document.getElementById('tituloH2')
-      h2.style.display = "block";
-      h2.innerHTML = "Você possui " + notificacoes.length +  " notificações"
-
-
-      notificacaoDiv.style.display = "inline-block";
+      if(h2 != null){
+        h2.style.display = "block";
+        h2.innerHTML = "Você possui " + notificacoes.length +  " notificações"
+      }
 
       vezAtual = 0;
       qtdVezes = notificacoes.length;

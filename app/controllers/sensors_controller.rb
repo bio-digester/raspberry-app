@@ -43,16 +43,22 @@ class SensorsController < ApplicationController
 
   def set_data_collect
     case @sensor.id
+
     when 1
       @data_collects  = DataCollect.where(sensor_id: Sensor.find_by(name: "TEMPDS").id).last(50)
+      @yAxis = "Temperatura (ºC)"
     when 2
-      @data_collects = DataCollect.where(sensor_id: Sensor.find_by(name: "PRESSURE").id).last(50)
-    when 3
       @data_collects = DataCollect.where(sensor_id: Sensor.find_by(name: "CONCENTRATION").id).last(50)
+      @yAxis = "Concentração (ppm)"
+    when 3
+      @data_collects = DataCollect.where(sensor_id: Sensor.find_by(name: "PRESSURE").id).last(50)
+      @yAxis = "Pressão (kPa)"
     when 4
       @data_collects = DataCollect.where(sensor_id: Sensor.find_by(name: "LEVEL").id).last(50)
+      @yAxis = "Volume (cm³)"
     when 5
       @data_collects = DataCollect.where(sensor_id: Sensor.find_by(name: "PH").id).last(50)
+      @yAxis = "pH"
     when 6
       @data_collects = DataCollect.where(sensor_id: Sensor.find_by(name: "ENTRY").id).last(50)
     else
