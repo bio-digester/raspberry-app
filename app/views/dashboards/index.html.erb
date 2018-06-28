@@ -196,7 +196,7 @@
         </div>
         <!-- /.panel-heading -->
         <div class="panel-body">
-          <div id="morris-area-chart"><%= line_chart get_last_fifty_path(:id => @sensors.find_by(name: "TEMPDS")), adapter: "highcharts", refresh: 5, suffix: " ºC", xtitle: "Tempo (hh:mm)", ytitle: "Temperatura (ºC)"%></div>
+          <div id="morris-area-chart"><%= line_chart get_last_fifty_path(:id => @sensors.find_by(name: "TEMPDS")), adapter: "highcharts", refresh: 5, suffix: " ºC", xtitle: "Tempo (hh:mm:ss)", ytitle: "Temperatura (ºC)"%></div>
         </div>
         <!-- /.panel-body -->
       </div>

@@ -1,4 +1,6 @@
-<div id="page-wrapper">
+axisY:{
+ title: "axisY Title",
+},<div id="page-wrapper">
   <h1 class="page-header"><%= @sensor.codename %></h1>
   <div class="row">
     <div class="col-lg-4">
@@ -75,13 +77,14 @@
       </div>
       <!-- /.panel-heading -->
       <div class="panel-body">
-        <div id="morris-area-chart"><%= line_chart @data_collects.pluck(:data_measure, :value), adapter: "highcharts"%></div>
+        <div id="morris-area-chart"><%= line_chart @data_collects.pluck(:data_measure, :value), adapter: "highcharts", suffix: @suffix, xtitle: "Tempo (hh:mm:ss)", ytitle: @yAxis %></div>
       </div>
       <!-- /.panel-body -->
     </div>
     <div class="col-lg-12">
     <!-- /.col-lg-8 -->
-      <!-- Zoom Graph CanvasJS-->
+
+      <!-- Zoom Graph Highcharts -->
       <div class="panel panel-default">
         <div class="panel-heading">
           <i class="fa fa-bar-chart-o fa-fw"></i> <%= @sensor.codename %> Vs Tempo / Gráfico de Zoom
@@ -91,10 +94,9 @@
           </div>
         </div>
       </div>
-      <div class="panel-body">
-        <div id="chartContainer1" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>
+      <div class="panel-body" style="margin: 20px auto;">
+        <div id="container0" style="min-width: 720px; height: 400px;  margin: 0px auto;"></div>
       </div>
-
 
       <!-- Real Time Graph CanvasJS-->
       <div class="panel panel-default">
@@ -107,22 +109,9 @@
         </div>
       </div>
       <div class="panel-body">
-        <div id="real_time" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>
+        <div id="real_time" style="height: 370px; max-width: 920px; margin: 0px auto;" ></div>
       </div>
 
-      <!-- Zoom Graph Highcharts -->
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <i class="fa fa-bar-chart-o fa-fw"></i> <%= @sensor.codename %> Vs Tempo / Gráfico de Zoom
-          <div class="pull-right">
-            <div class="btn-group">
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="panel-body">
-        <di+v id="container0" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-      </div>
     </div>
     <!-- /.col-lg-12 -->
   </div>
@@ -136,39 +125,6 @@
 </script>
 
 <script>
-// Zoom Graph CanvasJS Script
-$( document ).ready(function() {
-  console.log("carregou o onload");
-  var chart1 = new CanvasJS.Chart("chartContainer1", {
-    theme: "light2", // "light1", "light2", "dark1", "dark2"
-    animationEnabled: true,
-    zoomEnabled: true,
-    data: [{
-      type: "area",
-      dataPoints: []
-    }]
-  });
-  num = '<%= @data_collects.count %>'
-  valores = '<%= DataCollect.where(sensor_id: @sensor.id).to_json.html_safe %>'
-  valores = JSON.parse(valores);
-  addDataPoints(num, valores);
-  chart1.render();
-
-  function addDataPoints(noOfDps, valores) {
-    var xVal1 = chart1.options.data[0].dataPoints.length + 1, yVal1 = 0;
-    
-    for(var i = 0; i < noOfDps; i++) {
-        if(valores[i].value != null){
-          yVal1 =  eval(valores[i].value);
-          chart1.options.data[0].dataPoints.push({x: xVal1,y: yVal1});
-          xVal1++;
-        } 
-    }
-  }
-});
-</script>
-
-<script>
 $( document ).ready(function() {
   // Real Time CanvasJS Script
 
@@ -178,6 +134,7 @@ $( document ).ready(function() {
       title:"Tempo (hh:mm:ss)",
     },
     axisY: {
+      suffix: '<%= @suffix %>',
       title: '<%= @yAxis%>',
       includeZero: false
     },
@@ -196,18 +153,18 @@ $( document ).ready(function() {
   // var date = new Date(year, month, day, hours, minutes, seconds,);
 
   var updateInterval = 2000;
-  var dataLength = 10; // number of dataPoints visible at any point
+  var dataLength = 20; // number of dataPoints visible at any point
 
   var updateChart = function (count) {
-    xVal = new Date()
     count = count || 1;
+    
     $.get('../get_data_collect_last/<%= @sensor.id %>', function(valor){
+      xVal = new Date()
       yVal = valor
       dps.push({
           x: xVal,
           y: yVal
       });
-      xVal++;
     });
     
    

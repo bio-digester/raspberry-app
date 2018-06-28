@@ -24,7 +24,6 @@ class DashboardsController < ApplicationController
     id = params[:id]
     datas = DataCollect.where(sensor_id: id).last(50)
     datas = formatTime(datas)
-
     render json: datas.pluck(:data_measure, :value)
   end
 
@@ -34,7 +33,6 @@ class DashboardsController < ApplicationController
       y = data.data_measure.to_s
       values = y.split(" ")
       dayMonthYear = formatToBrazilianTime(values[0])
-
       data.data_measure = dayMonthYear + ' | ' + values[1]
     }
     datas

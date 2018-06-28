@@ -44,21 +44,36 @@ class SensorsController < ApplicationController
   def set_data_collect
     case @sensor.id
 
-    when 1
-      @data_collects  = DataCollect.where(sensor_id: Sensor.find_by(name: "TEMPDS").id).last(50)
+    when 1 
+      datas = DataCollect.where(sensor_id: Sensor.find_by(name: "TEMPDS").id).last(50)
+      @data_collects = formatTime(datas)
+
       @yAxis = "Temperatura (ºC)"
+      @suffix = "ºC"
     when 2
-      @data_collects = DataCollect.where(sensor_id: Sensor.find_by(name: "CONCENTRATION").id).last(50)
+      datas = DataCollect.where(sensor_id: Sensor.find_by(name: "CONCENTRATION").id).last(50)
+      @data_collects = formatTime(datas)
+
       @yAxis = "Concentração (ppm)"
+      @suffix = "ppm"
     when 3
-      @data_collects = DataCollect.where(sensor_id: Sensor.find_by(name: "PRESSURE").id).last(50)
+      datas = DataCollect.where(sensor_id: Sensor.find_by(name: "PRESSURE").id).last(50)
+      @data_collects = formatTime(datas)
+
       @yAxis = "Pressão (kPa)"
+      @suffix = "kPa"
     when 4
-      @data_collects = DataCollect.where(sensor_id: Sensor.find_by(name: "LEVEL").id).last(50)
+      datas = DataCollect.where(sensor_id: Sensor.find_by(name: "LEVEL").id).last(50)
+      @data_collects = formatTime(datas)
+
       @yAxis = "Volume (cm³)"
+      @suffix = "cm³"
     when 5
-      @data_collects = DataCollect.where(sensor_id: Sensor.find_by(name: "PH").id).last(50)
+      datas = DataCollect.where(sensor_id: Sensor.find_by(name: "PH").id).last(50)
+      @data_collects = formatTime(datas)
+
       @yAxis = "pH"
+      @suffix = ""
     when 6
       @data_collects = DataCollect.where(sensor_id: Sensor.find_by(name: "ENTRY").id).last(50)
     else
@@ -81,6 +96,23 @@ class SensorsController < ApplicationController
 
   def set_sensor
     @sensor = Sensor.find(params[:id])
+  end
+
+  private
+  def formatTime(datas)
+    datas.each { |data|
+      y = data.data_measure.to_s
+      values = y.split(" ")
+      dayMonthYear = formatToBrazilianTime(values[0])
+      data.data_measure = dayMonthYear + ' | ' + values[1]
+    }
+    datas
+  end
+
+  def formatToBrazilianTime(unformatedData)
+    values = unformatedData.split("-")
+    formatedData = values[2] + "-" + values[1] + "-" + values[0]
+    formatedData
   end
 
 end

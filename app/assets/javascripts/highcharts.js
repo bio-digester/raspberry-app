@@ -678,7 +678,7 @@
             destroyShadows: function() { x(this.shadows || [], function(a) { this.safeRemoveChild(a) }, this);
                 this.shadows = void 0 },
             xGetter: function(a) { "circle" === this.element.nodeName && ("x" === a ? a = "cx" : "y" === a && (a = "cy")); return this._defaultGetter(a) },
-            _defaultGetter: function(a) { a = G(this[a + "Value"], this[a], this.element ? this.element.getAttribute(a) : null, 0); /^[\-0-9\.]+$/.test(a) && (a = parseFloat(a)); return a },
+            _defaultGetter: function(a) { a = G(this[a + "Valor"], this[a], this.element ? this.element.getAttribute(a) : null, 0); /^[\-0-9\.]+$/.test(a) && (a = parseFloat(a)); return a },
             dSetter: function(a,
                 h, b) { a && a.join && (a = a.join(" ")); /(NaN| {2}|^$)/.test(a) && (a = "M 0 0");
                 this[h] !== a && (b.setAttribute(h, a), this[h] = a) },
