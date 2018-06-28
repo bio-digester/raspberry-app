@@ -501,7 +501,6 @@ function removerIdsFechados(id_closed_notification, notificacoes){
 
 function updateNotification(){
   $.get('../get_last_notification', function(notificacoes){
-    console.log(id_closed_notification);
     notificacoes = removerIdsFechados(id_closed_notification, notificacoes);
 
     if(notificacoes){

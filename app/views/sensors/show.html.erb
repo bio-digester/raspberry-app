@@ -132,6 +132,7 @@ $( document ).ready(function() {
   var chart = new CanvasJS.Chart("real_time", {
     axisX: {
       title:"Tempo (hh:mm:ss)",
+      valueFormatString: "hh:mm:ss tt"
     },
     axisY: {
       suffix: '<%= @suffix %>',

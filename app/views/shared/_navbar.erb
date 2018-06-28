@@ -54,7 +54,7 @@
           <a href="/" class="active"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
         </li>
         <li>
-          <a href="/"><i class="fa fa-files-o fa-fw"></i>  Sensores <span class="fa arrow"></span></a>
+          <a><i class="fa fa-files-o fa-fw"></i>  Sensores <span class="fa arrow"></span></a>
           <ul class="nav nav-second-level collapse">
             <li>
               <%= link_to "Temperatura", sensor_path(@sensors.find_by(name: "TEMPDS")) %>
