@@ -1,5 +1,6 @@
 class DashboardsController < ApplicationController
   # before_action :index, only: [:get_last_notification]
+
   def index
     @sensors = Sensor.all
     @data_collects = DataCollect.all
@@ -45,7 +46,7 @@ class DashboardsController < ApplicationController
                 {name: ["Concentração (ppm)"], data: concentracao.pluck(:data_measure, :value, :sensor_id) },
                 {name: ["Pressão (kPa)"], data: pressao.pluck(:data_measure, :value, :sensor_id) },
                 {name: ["Volume (cm³)"], data: volume.pluck(:data_measure, :value, :sensor_id) },
-                {name: ["pH"], data: ph.pluck(:data_measure, :value, :sensor_id) }, 
+                {name: ["pH"], data: ph.pluck(:data_measure, :value, :sensor_id) } 
                ]
   end
 
