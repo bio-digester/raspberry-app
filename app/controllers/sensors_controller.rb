@@ -42,39 +42,39 @@ class SensorsController < ApplicationController
   end
 
   def set_data_collect
-    case @sensor.id
+    case @sensor.name
 
-    when 1 
+    when "TEMPDS"
       datas = DataCollect.where(sensor_id: Sensor.find_by(name: "TEMPDS").id).last(50)
       @data_collects = formatTime(datas)
 
       @yAxis = "Temperatura (ºC)"
       @suffix = "ºC"
-    when 2
+    when "CONCENTRATION"
       datas = DataCollect.where(sensor_id: Sensor.find_by(name: "CONCENTRATION").id).last(50)
       @data_collects = formatTime(datas)
 
       @yAxis = "Concentração (ppm)"
       @suffix = "ppm"
-    when 3
+    when "PRESSURE"
       datas = DataCollect.where(sensor_id: Sensor.find_by(name: "PRESSURE").id).last(50)
       @data_collects = formatTime(datas)
 
       @yAxis = "Pressão (kPa)"
       @suffix = "kPa"
-    when 4
+    when "LEVEL"
       datas = DataCollect.where(sensor_id: Sensor.find_by(name: "LEVEL").id).last(50)
       @data_collects = formatTime(datas)
 
       @yAxis = "Volume (cm³)"
       @suffix = "cm³"
-    when 5
+    when "PH"
       datas = DataCollect.where(sensor_id: Sensor.find_by(name: "PH").id).last(50)
       @data_collects = formatTime(datas)
 
       @yAxis = "pH"
       @suffix = ""
-    when 6
+    when "ENTRY"
       @data_collects = DataCollect.where(sensor_id: Sensor.find_by(name: "ENTRY").id).last(50)
     else
       @data_collects = DataCollect.all

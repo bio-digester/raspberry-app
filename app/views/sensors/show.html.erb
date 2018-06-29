@@ -77,7 +77,7 @@ axisY:{
       </div>
       <!-- /.panel-heading -->
       <div class="panel-body">
-        <div id="morris-area-chart"><%= line_chart @data_collects.pluck(:data_measure, :value), adapter: "highcharts", suffix: @suffix, xtitle: "Tempo (hh:mm:ss)", ytitle: @yAxis %></div>
+        <div id="morris-area-chart-show"><%= line_chart  get_last_fifty_path(:id => @sensor.id) , adapter: "highcharts", refresh: 5, xtitle: "Tempo (hh:mm:ss)", ytitle: "Sensor de " + @sensor.codename %></div>
       </div>
       <!-- /.panel-body -->
     </div>
@@ -233,7 +233,7 @@ $.getJSON(
       },
       yAxis: {
         title: {
-          text: '<%= @yAxis%>'
+          text: "Valor de " + '<%= @yAxis%>'
         }
       },
       legend: {

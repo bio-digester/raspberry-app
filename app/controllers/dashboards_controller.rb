@@ -20,12 +20,12 @@ class DashboardsController < ApplicationController
     dataCollectedFromSensorsWithName
   end
 
-#  def get_last_fifty
-#    id = params[:id]
-#    datas = DataCollect.where(sensor_id: id).last(50)
-#    datas = formatTime(datas)
-#    render json: datas.pluck(:data_measure, :value)
-#  end
+ def get_last_fifty
+   id = params[:id]
+   datas = DataCollect.where(sensor_id: id).last(50)
+   datas = formatTime(datas)
+   render json: datas.pluck(:data_measure, :value)
+ end
 
   def get_last_fifty_all
 	temperaturaId = Sensor.find_by_name("TEMPDS").id
