@@ -83,7 +83,13 @@ class SensorsController < ApplicationController
 
   def get_last_value
     id = params[:id]
-    valor = DataCollect.where(sensor_id:id).last.value
+    ultimoColetaDoSensor = DataCollect.where(sensor_id:id).last
+    valor = nil
+    if ultimoColetaDoSensor
+      valor = ultimoColetaDoSensor.value
+    else
+      valor = nil
+    end
     json_response(valor)
   end
 

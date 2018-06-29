@@ -187,7 +187,7 @@
       <% if @data_collects.last(50) != nil %>
       <div class="panel panel-default">
         <div class="panel-heading">
-          <i class="fa fa-bar-chart-o fa-fw"></i> 50 últimos dados coletados / Horário do Registro
+          <center><i class="fa fa-bar-chart-o fa-fw"></i> 50 últimos dados coletados / Horário do Registro</center>
           <div class="pull-right">
             <div class="btn-group">
 
@@ -208,7 +208,7 @@
       <!-- /.panel -->
       <div class="panel panel-default">
         <div class="panel-heading">
-          <i class="fa fa-bar-chart-o fa-fw"></i> Volume de Dados De Cada Sensor
+          <center><i class="fa fa-bar-chart-o fa-fw"></i> Volume de dados por Sensor</center>
         </div>
         <div class="panel-body">
           <div id="morris-donut-chart"><%= column_chart @dataCollectedFromSensorsWithName, ytitle: "Quantidade de dados", xtitle: "Nome do sensor" %></div>
@@ -223,7 +223,7 @@
       <!-- /.panel -->
       <div class="panel panel-default">
         <div class="panel-heading">
-          <i class="fa fa-bar-chart-o fa-fw"></i> Volume de Dados Coletados Por Dia
+          <center><i class="fa fa-bar-chart-o fa-fw"></i> Volume de Dados Coletados Por Dia</center>
           <div class="pull-right">
             <div class="btn-group">
 
@@ -232,7 +232,7 @@
         </div>
         <!-- /.panel-heading -->
         <div class="panel-body">
-          <div id="morris-bar-chart"><%= column_chart @data_collects.group_by_day(:data_measure).count, ytitle: "Quantidade de dados"  %></div>
+          <div id="morris-bar-chart"><%= column_chart @data_collects.group_by_day(:data_measure).count, ytitle: "Quantidade de dados", xtitle: "Data"  %></div>
         </div>
         <!-- /.panel-body -->
 
