@@ -20,11 +20,40 @@ class DashboardsController < ApplicationController
     dataCollectedFromSensorsWithName
   end
 
-  def get_last_fifty
-    id = params[:id]
-    datas = DataCollect.where(sensor_id: id).last(50)
-    datas = formatTime(datas)
-    render json: datas.pluck(:data_measure, :value)
+#  def get_last_fifty
+#    id = params[:id]
+#    datas = DataCollect.where(sensor_id: id).last(50)
+#    datas = formatTime(datas)
+#    render json: datas.pluck(:data_measure, :value)
+#  end
+
+  def get_last_fifty_all
+	temperaturaId = Sensor.find_by_name("TEMPDS").id
+  temperatura = DataCollect.where(sensor_id: temperaturaId).last(50)
+	temperatura = formatTime(temperatura)
+
+  concentracaoId = Sensor.find_by_name("CONCENTRATION").id
+  concentracao = DataCollect.where(sensor_id: concentracaoId).last(50)
+	concentracao = formatTime(concentracao)
+
+  pressaoId = Sensor.find_by_name("PRESSURE").id
+  pressao = DataCollect.where(sensor_id: pressaoId).last(50)
+  pressao = formatTime(pressao)
+
+  volumeId = Sensor.find_by_name("LEVEL").id
+  volume = DataCollect.where(sensor_id: volumeId).last(50)
+  volume = formatTime(volume)
+
+  phId = Sensor.find_by_name("PH").id
+  ph = DataCollect.where(sensor_id: phId).last(50)
+  ph = formatTime(ph)
+  render json: [
+                {name: ["Temperatura (ºC)"], data: temperatura.pluck(:data_measure, :value, :sensor_id) },
+                {name: ["Concentração (ppm)"], data: concentracao.pluck(:data_measure, :value, :sensor_id) },
+                {name: ["Pressão (kPa)"], data: pressao.pluck(:data_measure, :value, :sensor_id) },
+                {name: ["Volume (cm³)"], data: volume.pluck(:data_measure, :value, :sensor_id) },
+                {name: ["pH"], data: ph.pluck(:data_measure, :value, :sensor_id) }, 
+               ]
   end
 
   private
