@@ -20,13 +20,6 @@ class DashboardsController < ApplicationController
     dataCollectedFromSensorsWithName
   end
 
- def get_last_fifty
-   id = params[:id]
-   datas = DataCollect.where(sensor_id: id).last(50)
-   datas = formatTime(datas)
-   render json: datas.pluck(:data_measure, :value)
- end
-
   def get_last_fifty_all
 	temperaturaId = Sensor.find_by_name("TEMPDS").id
   temperatura = DataCollect.where(sensor_id: temperaturaId).last(50)
@@ -56,7 +49,28 @@ class DashboardsController < ApplicationController
                ]
   end
 
+  def format_dates 
+    unordered_by_day = DataCollect.all().group_by_day(:data_measure).count
+    
+    newArray = {}
+    unordered_by_day.each{ |key, value|
+      newArray[formateDate(key)] = value 
+    }
+    
+    render json:  newArray
+  end
+
   private
+  def formateDate(data)
+    date = data.to_s
+    values = date.split("-")
+    year = values[0]
+    month = values[1]
+    day = values[2]
+    formated = day + "-" + month + "-" + year
+    return formated
+  end
+
   def formatTime(datas)
     datas.each { |data|
       y = data.data_measure.to_s

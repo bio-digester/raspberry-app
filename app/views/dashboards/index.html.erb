@@ -183,7 +183,7 @@
   <div class="row">
     <div class="col-lg-8">
 
-      <!-- Gráfico de Concentração -->
+      <!-- Gráfico de Todos os sensores -->
       <% if @data_collects.last(50) != nil %>
       <div class="panel panel-default">
         <div class="panel-heading">
@@ -196,7 +196,7 @@
         </div>
         <!-- /.panel-heading -->
         <div class="panel-body">
-          <div id="principal"><%= line_chart  get_last_fifty_all_path , adapter: "highcharts", refresh: 5, xtitle: "Tempo (hh:mm:ss)", ytitle: "Sensores"%></div>
+          <div id="principal"><%= line_chart  get_last_fifty_all_path , adapter: "highcharts", id: "chart-#sda", refresh: 5, xtitle: "Tempo (hh:mm:ss)", ytitle: "Sensores"%></div>
         </div>
         <!-- /.panel-body -->
       </div>
@@ -223,7 +223,7 @@
       <!-- /.panel -->
       <div class="panel panel-default">
         <div class="panel-heading">
-          <center><i class="fa fa-bar-chart-o fa-fw"></i> Volume de Dados Coletados Por Dia</center>
+          <center><i class="fa fa-bar-chart-o fa-fw"></i> Volume de dados coletados por DIA</center>
           <div class="pull-right">
             <div class="btn-group">
 
@@ -232,7 +232,7 @@
         </div>
         <!-- /.panel-heading -->
         <div class="panel-body">
-          <div id="morris-bar-chart"><%= column_chart @data_collects.group_by_day(:data_measure).count, ytitle: "Quantidade de dados", xtitle: "Data"  %></div>
+          <div id="morris-bar-chart"><%= column_chart format_dates_path, id:"chart-#wit", ytitle: "Quantidade de dados", xtitle: "Data (dd-mm-aaaa)"  %></div>
         </div>
         <!-- /.panel-body -->
 

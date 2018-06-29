@@ -93,6 +93,13 @@ class SensorsController < ApplicationController
     json_response(valor)
   end
 
+  def one_sensor_last_fifty
+   id = params[:id]
+   datas = DataCollect.where(sensor_id: id).last(50)
+   datas = formatTime(datas)
+   render json: datas.pluck(:data_measure, :value)
+ end
+
   private
 
   def sensor_params

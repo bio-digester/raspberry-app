@@ -20,8 +20,8 @@ Rails.application.routes.draw do
   put '/api/sensors/:sensor_id/data_collects/:id/' => 'data_collects#api_update'
   delete '/api/sensors/:sensor_id/data_collects/:id/' => 'data_collects#api_destroy'
 
-
-  get 'get_last_fifty/:id' => 'dashboards#get_last_fifty' , as: 'get_last_fifty'
+  get 'format_dates' => 'dashboards#format_dates', as: 'format_dates'
+  get 'one_sensor_last_fifty/:id' => 'sensors#one_sensor_last_fifty' , as: 'one_sensor_last_fifty'
   get 'get_last_fifty_all' => 'dashboards#get_last_fifty_all' , as: 'get_last_fifty_all'
   get 'get_data_collect_last/:id' => 'sensors#get_last_value'
   get 'get_last_notification/' => 'notifications#get_last_notification', as: 'get_last_notification'
